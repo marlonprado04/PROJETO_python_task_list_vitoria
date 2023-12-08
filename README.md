@@ -36,7 +36,7 @@ JSON.
 
 - Seu código deve demonstrar o uso adequado dos conceitos de POO, como encapsulamento, herança.
 - Seu código deve ser bem organizado e fácil de ler, com nomes de variáveis descritivos e comentários explicando o código onde necessário.
-\
+
 **Data de Entrega:** 12/dezembro
 
 **Critérios de Avaliação:** Você será avaliado com base na funcionalidade do seu sistema, no uso adequado dos conceitos de POO e na organização e legibilidade do seu código.
