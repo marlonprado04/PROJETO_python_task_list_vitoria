@@ -25,12 +25,12 @@ def main():
             status = input("Digite o status da tarefa: ")
             data_criacao = input("Digite a data de criação da tarefa: ")
 
-            nova_tarefa = Tarefa(
-                titulo, descricao, status, data_criacao
-            )
+            nova_tarefa = Tarefa(titulo, descricao, status, data_criacao)
 
             # Adicionar tarefa a um projeto existente ou criar um novo projeto
-            projeto_nome = input("Digite o nome do projeto (ou deixe em branco para criar um novo): ")
+            projeto_nome = input(
+                "Digite o nome do projeto (ou deixe em branco para criar um novo): "
+            )
             if projeto_nome:
                 # Adicionar a tarefa a um projeto existente
                 projeto_encontrado = False
@@ -46,7 +46,9 @@ def main():
                 # Criar um novo projeto e adicionar a tarefa
                 projeto_nome = input("Digite o nome do novo projeto: ")
                 projeto_descricao = input("Digite a descrição do novo projeto: ")
-                usuario_atual.criar_projeto(projeto_nome, projeto_descricao).adicionar_tarefa(nova_tarefa)
+                usuario_atual.criar_projeto(
+                    projeto_nome, projeto_descricao
+                ).adicionar_tarefa(nova_tarefa)
 
         elif escolha == "2":
             # Criar Projeto
@@ -73,6 +75,4 @@ def main():
 
 
 if __name__ == "__main__":
-    usuario_atual = Usuario("Nome do Usuário", "usuario@email.com")
-    usuarios.append(usuario_atual)
     main()
