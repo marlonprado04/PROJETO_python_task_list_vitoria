@@ -1,25 +1,24 @@
-import datetime
-
+from datetime import datetime
 
 class Tarefa:
+    # Define atributos da tarefa
     def __init__(self, titulo, descricao):
         self.titulo = titulo
         self.descricao = descricao
         self.status = "Pendente"
-        self.data_criacao = datetime.date.today()
+        self.data_criacao = datetime.now()
         self.data_conclusao = None
-        self.usuario = None
-        self.projeto = None
 
-    def concluir_tarefa(self):
-        self.status = "Concluída"
-        self.data_conclusao = datetime.date.today()
+    # Atualiza o status da tarefa
+    def atualizar_status(self):
+        self.status = "Finalizado"
+        self.data_conclusao = datetime.now()
 
-    def atribuir_usuario(self, usuario):
-        self.usuario = usuario
+    # Atualiza a descrição da tarefa
+    def atualizar_descricao(self, nova_descricao):
+        self.descricao = nova_descricao
 
-    def atribuir_projeto(self, projeto):
-        self.projeto = projeto
-    
-    def __str__(self):
-        return f"Tarefa: {self.titulo}, Status: {self.status}"
+    # Atualiza o título da tarefa
+    def atualizar_titulo(self, novo_titulo):
+        self.atualizar_titulo = novo_titulo
+

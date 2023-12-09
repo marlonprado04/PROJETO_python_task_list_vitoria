@@ -2,16 +2,8 @@ class Usuario:
     def __init__(self, nome, email):
         self.nome = nome
         self.email = email
-        self.projetos = []
+        self.tarefas_atribuidas = []
 
-    def criar_projeto(self, nome, descricao):
-        projeto = Projeto(nome, descricao)
-        self.projetos.append(projeto)
-        return projeto
-
-    def atribuir_tarefa(self, projeto, tarefa):
-        projeto.adicionar_tarefa(tarefa)
-        tarefa.atribuir_usuario(self)
-
-    def __str__(self):
-        return f"Usuario: {self.nome}, Email: {self.email}"
+    # Adiciona tarefa vinculada ao usuário
+    def adicionar_tarefa(self, tarefa):
+        self.tarefas_atribuidas.append(tarefa)
