@@ -6,8 +6,8 @@ from Usuario import Usuario
 def exibir_menu():
     print("\n=== MENU ===")
     print("1. Criar Projeto")
-    print("2. Adicionar Tarefa a um Projeto")
-    print("3. Atribuir Tarefa a um Usuário")
+    print("2. Adicionar Tarefa ao Projeto")
+    print("3. Atribuir Tarefa ao Usuário")
     print("4. Concluir Tarefa")
     print("5. Mostrar Status Geral do Projeto")
     print("6. Listar Usuários")
