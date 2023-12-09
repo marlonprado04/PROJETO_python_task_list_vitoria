@@ -1,8 +1,8 @@
 import json
 from datetime import datetime
-from classes.Tarefa import Tarefa
-from classes.Projeto import Projeto
-from classes.Usuario import Usuario
+from Tarefa import Tarefa
+from Projeto import Projeto
+from Usuario import Usuario
 
 
 class SistemaGerenciamentoTarefas:
