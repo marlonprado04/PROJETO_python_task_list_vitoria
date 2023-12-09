@@ -1,78 +1,151 @@
+import json
+
 from classes.Tarefa import Tarefa
 from classes.Projeto import Projeto
 from classes.Usuario import Usuario
 
 
-def menu():
-    print("\n===== MENU =====")
-    print("1. Criar Tarefa")
-    print("2. Criar Projeto")
-    print("3. Listar Projetos Pendentes por Usuário")
-    print("4. Sair")
+def salvar_dados(usuarios):
+    with open("dados.json", "w") as file:
+        json.dump(usuarios, file, default=lambda o: o.__dict__, indent=2)
 
 
-def main():
-    usuarios = []  # Armazenará todos os usuários
+def carregar_dados():
+    try:
+        with open("dados.json", "r") as file:
+            dados = json.load(file)
+            return dados
+    except FileNotFoundError:
+        return []
 
-    while True:
-        menu()
-        escolha = input("Escolha uma opção (1-4): ")
 
-        if escolha == "1":
-            # Criar Tarefa
-            titulo = input("Digite o título da tarefa: ")
-            descricao = input("Digite a descrição da tarefa: ")
-            status = input("Digite o status da tarefa: ")
-            data_criacao = input("Digite a data de criação da tarefa: ")
+usuarios = carregar_dados()
 
-            nova_tarefa = Tarefa(titulo, descricao, status, data_criacao)
+while True:
+    print("\n=== MENU ===")
+    print("1. Criar Usuário")
+    print("2. Listar Usuários")
+    print("3. Criar Projeto")
+    print("4. Listar Projetos de um Usuário")
+    print("5. Criar Tarefa")
+    print("6. Listar Tarefas de um Projeto")
+    print("0. Sair")
 
-            # Adicionar tarefa a um projeto existente ou criar um novo projeto
-            projeto_nome = input(
-                "Digite o nome do projeto (ou deixe em branco para criar um novo): "
-            )
-            if projeto_nome:
-                # Adicionar a tarefa a um projeto existente
-                projeto_encontrado = False
-                for usuario in usuarios:
-                    for projeto in usuario.projetos:
-                        if projeto.nome == projeto_nome:
-                            projeto.adicionar_tarefa(nova_tarefa)
-                            projeto_encontrado = True
-                            break
-                if not projeto_encontrado:
-                    print(f"Projeto '{projeto_nome}' não encontrado.")
-            else:
-                # Criar um novo projeto e adicionar a tarefa
-                projeto_nome = input("Digite o nome do novo projeto: ")
-                projeto_descricao = input("Digite a descrição do novo projeto: ")
-                usuario_atual.criar_projeto(
-                    projeto_nome, projeto_descricao
-                ).adicionar_tarefa(nova_tarefa)
+    escolha = input("Escolha uma opção: ")
 
-        elif escolha == "2":
-            # Criar Projeto
-            nome_projeto = input("Digite o nome do projeto: ")
-            descricao_projeto = input("Digite a descrição do projeto: ")
-            usuario_atual.criar_projeto(nome_projeto, descricao_projeto)
+    if escolha == "1":
+        nome = input("Digite o nome do usuário: ")
+        email = input("Digite o email do usuário: ")
+        usuario = Usuario(nome, email)
+        usuarios.append(usuario)
+        print("Usuário criado com sucesso!")
 
-        elif escolha == "3":
-            # Listar Projetos Pendentes por Usuário
-            for usuario in usuarios:
-                print(f"\nProjetos pendentes para {usuario.nome}:")
-                for projeto in usuario.projetos:
-                    print(f"\nProjeto: {projeto.nome}")
-                    for tarefa in projeto.listar_tarefas():
-                        print(f"Tarefa: {tarefa.titulo} - Status: {tarefa.status}")
+    elif escolha == "2":
+        for i, user in enumerate(usuarios, start=1):
+            print(f"{i}. {user}")
 
-        elif escolha == "4":
-            # Sair do programa
-            print("\nSaindo do programa.")
-            break
+    elif escolha == "3":
+        nome_projeto = input("Digite o nome do projeto: ")
+        descricao_projeto = input("Digite a descrição do projeto: ")
+        projeto = Projeto(nome_projeto, descricao_projeto)
 
+        print("Usuários disponíveis:")
+        for i, user in enumerate(usuarios, start=1):
+            print(f"{i}. {user}")
+
+        escolha_usuario = (
+            int(input("Escolha o número do usuário para associar ao projeto: ")) - 1
+        )
+        if 0 <= escolha_usuario < len(usuarios):
+            usuarios[escolha_usuario].adicionar_projeto(projeto)
+            print("Projeto criado e associado ao usuário com sucesso!")
         else:
-            print("\nOpção inválida. Tente novamente.")
+            print("Escolha de usuário inválida.")
 
+    elif escolha == "4":
+        print("Usuários disponíveis:")
+        for i, user in enumerate(usuarios, start=1):
+            print(f"{i}. {user}")
 
-if __name__ == "__main__":
-    main()
+        escolha_usuario = (
+            int(input("Escolha o número do usuário para listar os projetos: ")) - 1
+        )
+        if 0 <= escolha_usuario < len(usuarios):
+            for projeto in usuarios[escolha_usuario].projetos:
+                print(projeto)
+        else:
+            print("Escolha de usuário inválida.")
+
+    elif escolha == "5":
+        titulo_tarefa = input("Digite o título da tarefa: ")
+        descricao_tarefa = input("Digite a descrição da tarefa: ")
+        tarefa = Tarefa(titulo_tarefa, descricao_tarefa)
+
+        print("Projetos disponíveis:")
+        for i, user in enumerate(usuarios, start=1):
+            print(f"{i}. {user}")
+
+        escolha_usuario = (
+            int(
+                input(
+                    "Escolha o número do usuário para associar a tarefa a um projeto: "
+                )
+            )
+            - 1
+        )
+        if 0 <= escolha_usuario < len(usuarios):
+            usuario = usuarios[escolha_usuario]
+            print("Projetos associados ao usuário:")
+            for i, projeto in enumerate(usuario.projetos, start=1):
+                print(f"{i}. {projeto}")
+
+            escolha_projeto = (
+                int(input("Escolha o número do projeto para associar a tarefa: ")) - 1
+            )
+            if 0 <= escolha_projeto < len(usuario.projetos):
+                projeto = usuario.projetos[escolha_projeto]
+                projeto.adicionar_tarefa(tarefa)
+                print("Tarefa criada e associada ao projeto com sucesso!")
+            else:
+                print("Escolha de projeto inválida.")
+        else:
+            print("Escolha de usuário inválida.")
+
+    elif escolha == "6":
+        print("Usuários disponíveis:")
+        for i, user in enumerate(usuarios, start=1):
+            print(f"{i}. {user}")
+
+        escolha_usuario = (
+            int(
+                input(
+                    "Escolha o número do usuário para listar as tarefas de um projeto: "
+                )
+            )
+            - 1
+        )
+        if 0 <= escolha_usuario < len(usuarios):
+            usuario = usuarios[escolha_usuario]
+            print("Projetos associados ao usuário:")
+            for i, projeto in enumerate(usuario.projetos, start=1):
+                print(f"{i}. {projeto}")
+
+            escolha_projeto = (
+                int(input("Escolha o número do projeto para listar as tarefas: ")) - 1
+            )
+            if 0 <= escolha_projeto < len(usuario.projetos):
+                projeto = usuario.projetos[escolha_projeto]
+                for tarefa in projeto.tarefas:
+                    print(tarefa)
+            else:
+                print("Escolha de projeto inválida.")
+        else:
+            print("Escolha de usuário inválida.")
+
+    elif escolha == "0":
+        salvar_dados(usuarios)
+        print("Saindo do programa. Dados salvos em 'dados.json'.")
+        break
+
+    else:
+        print("Opção inválida. Tente novamente.")

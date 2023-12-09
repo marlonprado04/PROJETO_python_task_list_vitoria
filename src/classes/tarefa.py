@@ -1,44 +1,25 @@
+import datetime
+
+
 class Tarefa:
-    def __init__(self, titulo, descricao, status, data_criacao, data_conclusao=None):
+    def __init__(self, titulo, descricao):
         self.titulo = titulo
         self.descricao = descricao
-        self.status = status
-        self.data_criacao = data_criacao
-        self.data_conclusao = data_conclusao
+        self.status = "Pendente"
+        self.data_criacao = datetime.date.today()
+        self.data_conclusao = None
+        self.usuario = None
+        self.projeto = None
 
-    def to_dict(self):
-        return {
-            'titulo': self.titulo,
-            'descricao': self.descricao,
-            'status': self.status,
-            'data_criacao': self.data_criacao,
-            'data_conclusao': self.data_conclusao
-        }
+    def concluir_tarefa(self):
+        self.status = "Concluída"
+        self.data_conclusao = datetime.date.today()
 
+    def atribuir_usuario(self, usuario):
+        self.usuario = usuario
 
-class Projeto:
-    def __init__(self, nome, descricao):
-        self.nome = nome
-        self.descricao = descricao
-        self.tarefas = []
-
-    def adicionar_tarefa(self, tarefa):
-        self.tarefas.append(tarefa)
-
-    def listar_tarefas(self):
-        return self.tarefas
-
-
-class Usuario:
-    def __init__(self, nome, email):
-        self.nome = nome
-        self.email = email
-        self.projetos = []
-
-    def criar_projeto(self, nome, descricao):
-        novo_projeto = Projeto(nome, descricao)
-        self.projetos.append(novo_projeto)
-        return novo_projeto
-
-    def listar_projetos(self):
-        return self.projetos
+    def atribuir_projeto(self, projeto):
+        self.projeto = projeto
+    
+    def __str__(self):
+        return f"Tarefa: {self.titulo}, Status: {self.status}"

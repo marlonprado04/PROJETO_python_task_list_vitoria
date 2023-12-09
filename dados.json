@@ -1,0 +1,11 @@
+{
+    "usuarios": [
+        {
+            "nome": "Marlon",
+            "email": "@adja",
+            "lista_de_tarefas": []
+        }
+    ],
+    "tarefas_soltas": [],
+    "projetos": []
+}

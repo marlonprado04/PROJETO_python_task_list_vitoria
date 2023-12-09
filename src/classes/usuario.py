@@ -1,17 +1,17 @@
-from classes.Tarefa import Tarefa
-
 class Usuario:
     def __init__(self, nome, email):
         self.nome = nome
         self.email = email
-        self.tarefas_atribuidas = []
+        self.projetos = []
 
-    def criar_tarefa(self, titulo, descricao, status, data_criacao, data_conclusao=None):
-        nova_tarefa = Tarefa(titulo, descricao, status, data_criacao, data_conclusao)
-        self.tarefas_atribuidas.append(nova_tarefa)
-        Tarefa.salvar_tarefas_em_json(self.tarefas_atribuidas)
-        return nova_tarefa
+    def criar_projeto(self, nome, descricao):
+        projeto = Projeto(nome, descricao)
+        self.projetos.append(projeto)
+        return projeto
 
-    def alterar_status_tarefa(self, tarefa, novo_status):
-        tarefa.status = novo_status
-        Tarefa.salvar_tarefas_em_json(self.tarefas_atribuidas)
+    def atribuir_tarefa(self, projeto, tarefa):
+        projeto.adicionar_tarefa(tarefa)
+        tarefa.atribuir_usuario(self)
+
+    def __str__(self):
+        return f"Usuario: {self.nome}, Email: {self.email}"

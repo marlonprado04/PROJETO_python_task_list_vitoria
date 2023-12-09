@@ -1,5 +1,3 @@
-from classes.Tarefa import Tarefa
-
 class Projeto:
     def __init__(self, nome, descricao):
         self.nome = nome
@@ -8,20 +6,14 @@ class Projeto:
 
     def adicionar_tarefa(self, tarefa):
         self.tarefas.append(tarefa)
-        Tarefa.salvar_tarefas_em_json(self.tarefas)
 
-    def ver_status_geral(self):
-        if self.tarefas:
-            for i, tarefa in enumerate(self.tarefas):
-                print(f"{i+1}. {tarefa.titulo} - {tarefa.status}")
-        else:
-            print("O projeto não tem tarefas.")
+    def remover_tarefa(self, tarefa):
+        self.tarefas.remove(tarefa)
 
-    def criar_tarefa(self, titulo, descricao, status, data_criacao, data_conclusao=None):
-        nova_tarefa = Tarefa(titulo, descricao, status, data_criacao, data_conclusao)
-        self.adicionar_tarefa(nova_tarefa)
-        return nova_tarefa
+    def status_geral(self):
+        concluidas = sum(1 for tarefa in self.tarefas if tarefa.status == "Concluída")
+        total = len(self.tarefas)
+        return f"Projeto {self.nome}: {concluidas}/{total} tarefas concluídas"
 
-    def alterar_status_tarefa(self, tarefa, novo_status):
-        tarefa.status = novo_status
-        Tarefa.salvar_tarefas_em_json(self.tarefas)
+    def __str__(self):
+        return f"Projeto: {self.nome}, Descrição: {self.descricao}"
