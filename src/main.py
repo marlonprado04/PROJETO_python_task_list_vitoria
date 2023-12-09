@@ -12,114 +12,7 @@ class SistemaGerenciamentoTarefas:
         self.tarefas_soltas = []
         self.projetos = []
 
-    # Operações CRUD para Usuários
 
-    def criar_usuario(self, nome, email):
-        # Cria um novo usuário e o adiciona à lista de usuários
-        usuario = Usuario(nome, email)
-        self.usuarios.append(usuario)
-        return usuario
-
-    def listar_usuarios(self):
-        # Lista os usuários disponíveis
-        for i, usuario in enumerate(self.usuarios):
-            print(f"{i + 1}. {usuario.nome}")
-
-    def editar_usuario(self, usuario, nome, email):
-        # Edita as informações de um usuário
-        usuario.nome = nome
-        usuario.email = email
-
-    def excluir_usuario(self, usuario):
-        # Exclui um usuário da lista
-        self.usuarios.remove(usuario)
-
-    # Operações CRUD para Tarefas Soltas
-
-    def criar_tarefa_solta(self, titulo, descricao):
-        # Cria uma nova tarefa solta e a adiciona à lista
-        tarefa = Tarefa(titulo, descricao)
-        self.tarefas_soltas.append(tarefa)
-        return tarefa
-
-    def listar_tarefas_soltas(self):
-        # Lista as tarefas soltas disponíveis
-        for i, tarefa in enumerate(self.tarefas_soltas):
-            print(f"{i + 1}. {tarefa.titulo}")
-
-    def editar_tarefa_solta(self, tarefa, titulo, descricao):
-        # Edita as informações de uma tarefa solta
-        tarefa.titulo = titulo
-        tarefa.descricao = descricao
-
-    def excluir_tarefa_solta(self, tarefa):
-        # Exclui uma tarefa solta da lista
-        self.tarefas_soltas.remove(tarefa)
-
-    # Operações CRUD para Projetos
-
-    def criar_projeto(self, nome, descricao):
-        # Cria um novo projeto e o adiciona à lista de projetos
-        projeto = Projeto(nome, descricao)
-        self.projetos.append(projeto)
-        return projeto
-
-    def listar_projetos(self):
-        # Lista os projetos disponíveis
-        for i, projeto in enumerate(self.projetos):
-            print(f"{i + 1}. {projeto.nome}")
-
-    def editar_projeto(self, projeto, nome, descricao):
-        # Edita as informações de um projeto
-        projeto.nome = nome
-        projeto.descricao = descricao
-
-    def excluir_projeto(self, projeto):
-        # Exclui um projeto da lista
-        self.projetos.remove(projeto)
-
-    # Operações CRUD para Tarefas em Projetos
-
-    def criar_tarefa_em_projeto(self, projeto, titulo, descricao):
-        # Cria uma nova tarefa vinculada a um projeto e a adiciona à lista de tarefas do projeto
-        tarefa = Tarefa(titulo, descricao)
-        projeto.adicionar_tarefa(tarefa)
-        return tarefa
-
-    def listar_tarefas_em_projeto(self, projeto):
-        # Lista as tarefas vinculadas a um projeto
-        projeto.mostrar_tarefas()
-
-    def editar_tarefa_em_projeto(self, tarefa, titulo, descricao):
-        # Edita as informações de uma tarefa vinculada a um projeto
-        tarefa.titulo = titulo
-        tarefa.descricao = descricao
-
-    def excluir_tarefa_em_projeto(self, projeto, tarefa):
-        # Exclui uma tarefa vinculada a um projeto
-        projeto.remover_tarefa(tarefa)
-
-    # Operações CRUD para Tarefas Soltas
-
-    def criar_tarefa_solta(self, titulo, descricao):
-        # Cria uma nova tarefa solta e a adiciona à lista de tarefas soltas
-        tarefa = Tarefa(titulo, descricao)
-        self.tarefas_soltas.append(tarefa)
-        return tarefa
-
-    def listar_tarefas_soltas(self):
-        # Lista as tarefas soltas disponíveis
-        for i, tarefa in enumerate(self.tarefas_soltas):
-            print(f"{i + 1}. {tarefa.titulo}")
-
-    def editar_tarefa_solta(self, tarefa, titulo, descricao):
-        # Edita as informações de uma tarefa solta
-        tarefa.titulo = titulo
-        tarefa.descricao = descricao
-
-    def excluir_tarefa_solta(self, tarefa):
-        # Exclui uma tarefa solta da lista
-        self.tarefas_soltas.remove(tarefa)
 
     def menu_principal(self):
         # Menu principal para interação com o sistema
@@ -317,6 +210,115 @@ class SistemaGerenciamentoTarefas:
                 break
             else:
                 print("Opção inválida. Tente novamente.")
+
+    # Operações CRUD para Usuários
+
+    def criar_usuario(self, nome, email):
+        # Cria um novo usuário e o adiciona à lista de usuários
+        usuario = Usuario(nome, email)
+        self.usuarios.append(usuario)
+        return usuario
+
+    def listar_usuarios(self):
+        # Lista os usuários disponíveis
+        for i, usuario in enumerate(self.usuarios):
+            print(f"{i + 1}. {usuario.nome}")
+
+    def editar_usuario(self, usuario, nome, email):
+        # Edita as informações de um usuário
+        usuario.nome = nome
+        usuario.email = email
+
+    def excluir_usuario(self, usuario):
+        # Exclui um usuário da lista
+        self.usuarios.remove(usuario)
+
+    # Operações CRUD para Tarefas Soltas
+
+    def criar_tarefa_solta(self, titulo, descricao):
+        # Cria uma nova tarefa solta e a adiciona à lista
+        tarefa = Tarefa(titulo, descricao)
+        self.tarefas_soltas.append(tarefa)
+        return tarefa
+
+    def listar_tarefas_soltas(self):
+        # Lista as tarefas soltas disponíveis
+        for i, tarefa in enumerate(self.tarefas_soltas):
+            print(f"{i + 1}. {tarefa.titulo}")
+
+    def editar_tarefa_solta(self, tarefa, titulo, descricao):
+        # Edita as informações de uma tarefa solta
+        tarefa.titulo = titulo
+        tarefa.descricao = descricao
+
+    def excluir_tarefa_solta(self, tarefa):
+        # Exclui uma tarefa solta da lista
+        self.tarefas_soltas.remove(tarefa)
+
+    # Operações CRUD para Projetos
+
+    def criar_projeto(self, nome, descricao):
+        # Cria um novo projeto e o adiciona à lista de projetos
+        projeto = Projeto(nome, descricao)
+        self.projetos.append(projeto)
+        return projeto
+
+    def listar_projetos(self):
+        # Lista os projetos disponíveis
+        for i, projeto in enumerate(self.projetos):
+            print(f"{i + 1}. {projeto.nome}")
+
+    def editar_projeto(self, projeto, nome, descricao):
+        # Edita as informações de um projeto
+        projeto.nome = nome
+        projeto.descricao = descricao
+
+    def excluir_projeto(self, projeto):
+        # Exclui um projeto da lista
+        self.projetos.remove(projeto)
+
+    # Operações CRUD para Tarefas em Projetos
+
+    def criar_tarefa_em_projeto(self, projeto, titulo, descricao):
+        # Cria uma nova tarefa vinculada a um projeto e a adiciona à lista de tarefas do projeto
+        tarefa = Tarefa(titulo, descricao)
+        projeto.adicionar_tarefa(tarefa)
+        return tarefa
+
+    def listar_tarefas_em_projeto(self, projeto):
+        # Lista as tarefas vinculadas a um projeto
+        projeto.mostrar_tarefas()
+
+    def editar_tarefa_em_projeto(self, tarefa, titulo, descricao):
+        # Edita as informações de uma tarefa vinculada a um projeto
+        tarefa.titulo = titulo
+        tarefa.descricao = descricao
+
+    def excluir_tarefa_em_projeto(self, projeto, tarefa):
+        # Exclui uma tarefa vinculada a um projeto
+        projeto.remover_tarefa(tarefa)
+
+    # Operações CRUD para Tarefas Soltas
+
+    def criar_tarefa_solta(self, titulo, descricao):
+        # Cria uma nova tarefa solta e a adiciona à lista de tarefas soltas
+        tarefa = Tarefa(titulo, descricao)
+        self.tarefas_soltas.append(tarefa)
+        return tarefa
+
+    def listar_tarefas_soltas(self):
+        # Lista as tarefas soltas disponíveis
+        for i, tarefa in enumerate(self.tarefas_soltas):
+            print(f"{i + 1}. {tarefa.titulo}")
+
+    def editar_tarefa_solta(self, tarefa, titulo, descricao):
+        # Edita as informações de uma tarefa solta
+        tarefa.titulo = titulo
+        tarefa.descricao = descricao
+
+    def excluir_tarefa_solta(self, tarefa):
+        # Exclui uma tarefa solta da lista
+        self.tarefas_soltas.remove(tarefa)
 
     def salvar_dados(self):
         # Salva os dados em um arquivo JSON
