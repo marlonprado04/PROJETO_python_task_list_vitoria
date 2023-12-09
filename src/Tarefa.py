@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Tarefa:
     # Define atributos da tarefa
     def __init__(self, titulo, descricao):
@@ -20,5 +21,4 @@ class Tarefa:
 
     # Atualiza o título da tarefa
     def atualizar_titulo(self, novo_titulo):
-        self.atualizar_titulo = novo_titulo
-
+        self.titulo = novo_titulo

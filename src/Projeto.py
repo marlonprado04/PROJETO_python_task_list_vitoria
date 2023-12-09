@@ -1,3 +1,6 @@
+import json
+
+
 class Projeto:
     def __init__(self, nome, descricao):
         # Inicializa um novo projeto com um nome e descrição
@@ -28,3 +31,14 @@ class Projeto:
         print(f"Total de tarefas: {total_tarefas}")
         print(f"Tarefas pendentes: {tarefas_pendentes}")
         print(f"Porcentagem de tarefas pendentes: {porcentagem_tarefas_pendentes:.2f}%")
+
+    # Salva os dados do projeto em um arquivo JSON
+    def salvar_em_json(self, nome_arquivo):
+        with open(nome_arquivo, "w") as arquivo:
+            json.dump(self.__dict__, arquivo)
+
+    # Carrega os dados do projeto de um arquivo JSON
+    def carregar_de_json(self, nome_arquivo):
+        with open(nome_arquivo, "r") as arquivo:
+            dados = json.load(arquivo)
+            self.__dict__.update(dados)
