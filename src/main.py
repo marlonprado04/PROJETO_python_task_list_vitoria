@@ -10,22 +10,39 @@ def exibir_menu():
     print("3. Atribuir Tarefa a um Usuário")
     print("4. Concluir Tarefa")
     print("5. Mostrar Status Geral do Projeto")
-    print("6. Salvar Projeto em JSON")
-    print("7. Carregar Projeto de JSON")
-    print("8. Sair")
+    print("6. Listar Usuários")
+    print("7. Listar Projetos")
+    print("8. Salvar Projeto em JSON")
+    print("9. Carregar Projeto de JSON")
+    print("10. Sair")
+
+
+def listar_usuarios(usuarios):
+    print("\n=== LISTA DE USUÁRIOS ===")
+    for i, usuario in enumerate(usuarios):
+        print(f"{i + 1}. {usuario.nome} ({usuario.email})")
+
+
+def listar_projetos(projetos):
+    print("\n=== LISTA DE PROJETOS ===")
+    for i, projeto in enumerate(projetos):
+        print(f"{i + 1}. {projeto.nome}")
 
 
 def main():
+    usuarios = []  # Lista para armazenar usuários
+    projetos = []  # Lista para armazenar projetos
     projeto_atual = None
 
     while True:
         exibir_menu()
-        opcao = input("Escolha uma opção (1-8): ")
+        opcao = input("Escolha uma opção (1-10): ")
 
         if opcao == "1":
             nome_projeto = input("Digite o nome do projeto: ")
             descricao_projeto = input("Digite a descrição do projeto: ")
             projeto_atual = Projeto(nome_projeto, descricao_projeto)
+            projetos.append(projeto_atual)
             print(f"Projeto '{nome_projeto}' criado com sucesso!")
 
         elif opcao == "2":
@@ -46,15 +63,19 @@ def main():
                         input("Digite o índice da tarefa a ser atribuída: ")
                     )
                     if 0 <= indice_tarefa < len(projeto_atual.lista_de_tarefas):
-                        nome_usuario = input("Digite o nome do usuário: ")
-                        email_usuario = input("Digite o email do usuário: ")
-                        usuario = Usuario(nome_usuario, email_usuario)
-                        usuario.adicionar_tarefa(
-                            projeto_atual.lista_de_tarefas[indice_tarefa]
-                        )
-                        print(f"Tarefa atribuída ao usuário '{nome_usuario}'.")
+                        listar_usuarios(usuarios)
+                        indice_usuario = int(input("Digite o índice do usuário: "))
+                        if 0 <= indice_usuario < len(usuarios):
+                            usuarios[indice_usuario].adicionar_tarefa(
+                                projeto_atual.lista_de_tarefas[indice_tarefa]
+                            )
+                            print(
+                                f"Tarefa atribuída ao usuário '{usuarios[indice_usuario].nome}'."
+                            )
+                        else:
+                            print("Índice de usuário inválido!")
                     else:
-                        print("Índice inválido!")
+                        print("Índice de tarefa inválido!")
                 else:
                     print("Adicione tarefas ao projeto primeiro!")
 
@@ -78,7 +99,7 @@ def main():
                         ].atualizar_status()
                         print("Tarefa concluída com sucesso!")
                     else:
-                        print("Índice inválido!")
+                        print("Índice de tarefa inválido!")
                 else:
                     print("Adicione tarefas ao projeto primeiro!")
 
@@ -92,6 +113,12 @@ def main():
                 print("Crie um projeto primeiro!")
 
         elif opcao == "6":
+            listar_usuarios(usuarios)
+
+        elif opcao == "7":
+            listar_projetos(projetos)
+
+        elif opcao == "8":
             if projeto_atual is not None:
                 nome_arquivo = input(
                     "Digite o nome do arquivo JSON para salvar o projeto: "
@@ -101,15 +128,16 @@ def main():
             else:
                 print("Crie um projeto primeiro!")
 
-        elif opcao == "7":
+        elif opcao == "9":
             nome_arquivo = input(
                 "Digite o nome do arquivo JSON para carregar o projeto: "
             )
             projeto_atual = Projeto("", "")
             projeto_atual.carregar_de_json(nome_arquivo)
+            projetos.append(projeto_atual)
             print(f"Projeto carregado de '{nome_arquivo}'.")
 
-        elif opcao == "8":
+        elif opcao == "10":
             print("Saindo do programa. Até logo!")
             break
 
