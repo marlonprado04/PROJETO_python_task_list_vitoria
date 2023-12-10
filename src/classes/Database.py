@@ -44,17 +44,20 @@ class Database:
 
     # Adiciona usuário e salva no arquivo json
     def adicionar_usuario(self, usuario):
-        self.dados["usuarios"].append(usuario)
+        novo_usuario = usuario.to_dict()
+        self.dados["usuarios"].append(novo_usuario)
         self._salvar_dados()
 
     # Adiciona projeto e salva no arquivo json
     def adicionar_projeto(self, projeto):
-        self.dados["projetos"].append(projeto)
+        novo_projeto = projeto.to_dict()
+        self.dados["projetos"].append(novo_projeto)
         self._salvar_dados()
 
     # Adiciona tarefa e salva no arquivo json
     def adicionar_tarefa(self, tarefa):
-        self.dados["tarefas"].append(tarefa)
+        nova_tarefa = tarefa.to_dict()
+        self.dados["tarefas"].append(nova_tarefa)
         self._salvar_dados()
 
     # Obtém lista de usuários
