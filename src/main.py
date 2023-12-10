@@ -1,6 +1,6 @@
 from classes.Tarefa import Tarefa
 from classes.Projeto import Projeto
-
+from classes.Database import Database
 
 # Define função para exibir o menu principal
 def exibir_menu_principal():
@@ -28,10 +28,14 @@ def exibir_menu_usuario():
     print("\n----- MENU DE USUÁRIOS -----")
 
 
-tarefa1 = Tarefa("Minha tarefa", "é essa aqui")
 
-print(tarefa1.to_dict())
+# Exemplo de uso:
 
-tarefa1.atualizar_status()
+# Criando uma instância da classe Database
+db = Database()
 
-print(tarefa1.to_dict())
+# Criando uma instância da classe Tarefa
+nova_tarefa = Tarefa("Nova Tarefa")
+
+# Adicionando a tarefa ao banco de dados
+db.adicionar_tarefa(nova_tarefa)

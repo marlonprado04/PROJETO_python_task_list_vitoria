@@ -1,79 +1,43 @@
 import json
-
-
 class Database:
-    def __init__(self, nome_arquivo):
-        self.nome_arquivo = nome_arquivo
-        # Carrega dados ao iniciar a classe
-        self.dados = self._carregar_dados()
+    # Inicia a classe informando o nome do arquivo
+    def __init__(self, caminho_do_arquivo):
+        self.caminho_do_arquivo = caminho_do_arquivo
+        self.dados = self.carregar_json()
 
-    # Carrega dados do arquivo jsos
-    def _carregar_dados(self):
+    # Carrega dados do arquivo de acordo com o caminho passado
+    def carregar_json(self):
         try:
-            # Abre o arquivo no modo de leitura
-            with open(self.nome_arquivo, "r") as arquivo:
-                # Lê o conteúdo do arquivo
-                conteudo = arquivo.read()
-                # Verifica se o arquivo não está vazio
-                if conteudo:
-                    # Carrega e retorna os dados do arquivo JSON
-                    return json.loads(conteudo)
-                else:
-                    # Se o arquivo está vazio, retorna um banco de dados vazio
-                    return {"usuarios": [], "projetos": [], "tarefas": []}
+            # Abre o arquivo json a partir do caminho informado na construção do objeto
+            with open(self.caminho_do_arquivo, 'r') as arquivo:
+                # Armazena leitura dos dados em uma variável
+                dados = json.load(arquivo)
+            # Retorna variável com os dados lidos
+            return dados
         except FileNotFoundError:
-            # Se o arquivo não existe, cria o arquivo e retorna um banco de dados vazio
-            self._criar_arquivo()
-            return {"usuarios": [], "projetos": [], "tarefas": []}
-        except json.decoder.JSONDecodeError:
-            # Se o arquivo não contém um JSON válido, retorna um banco de dados vazio
-            return {"usuarios": [], "projetos": [], "tarefas": []}
+            # Se não encontrado, o arquivo é criado em branco
+            return {'usuarios': [], 'projetos': [], 'tarefas': []}
 
-    # Cria o arquivo
-    def _criar_arquivo(self):
-        with open(self.nome_arquivo, "w") as arquivo:
-            # Escreve um JSON vazio no arquivo
-            json.dump({"usuarios": [], "projetos": [], "tarefas": []}, arquivo)
+    # Atualiza o arquivo 
+    def atualizar_json(self):
+        # Abre o arquivo passado e atualiza os dados
+        with open(self.caminho_do_arquivo, 'w') as file:
+            #  Adiciona os dados dentro do arquivo
+            json.dump(self.dados, file, indent=4)
 
-    # Salva dados no arquivo json
-    def _salvar_dados(self):
-        # Abre arquivo no modo de escrita
-        with open(self.nome_arquivo, "w") as arquivo:
-            # Serializa e escreve os dados no arquivo JSON com indentação de 2 espaços
-            json.dump(self._serializar_dados(), arquivo, indent=2)
-
-    # Adiciona usuário e salva no arquivo json
+    # Adiciona informações do usuário ao arquivo
     def adicionar_usuario(self, usuario):
-        novo_usuario = usuario.to_dict()
-        self.dados["usuarios"].append(novo_usuario)
-        self._salvar_dados()
+        self.dados['usuarios'].append(usuario.to_dict())
+        self.atualizar_json()
 
-    # Adiciona projeto e salva no arquivo json
+    # Adiciona informações do projeto ao arquivo
     def adicionar_projeto(self, projeto):
-        novo_projeto = projeto.to_dict()
-        self.dados["projetos"].append(novo_projeto)
-        self._salvar_dados()
+        self.dados['projetos'].append(projeto.to_dict())
+        self.atualizar_json()
 
-    # Adiciona tarefa e salva no arquivo json
+    # Adiciona informações da tarefa ao arquivo
     def adicionar_tarefa(self, tarefa):
-        nova_tarefa = tarefa.to_dict()
-        self.dados["tarefas"].append(nova_tarefa)
-        self._salvar_dados()
+        self.dados['tarefas'].append(tarefa.to_dict())
+        self.atualizar_json()
 
-    # Obtém lista de usuários
-    def obter_usuarios(self):
-        return self.dados["usuarios"]
 
-    # Obtém lista de projetos
-    def obter_projetos(self):
-        return self.dados["projetos"]
-
-    # Obtém lista de tarefas
-    def obter_tarefas(self):
-        return self.dados["tarefas"]
-
-    # Serializa os dados
-    def _serializar_dados(self):
-        return {
-            "tarefas": [tarefa.to_dict() for tarefa in self.dados["tarefas"]],
-        }
