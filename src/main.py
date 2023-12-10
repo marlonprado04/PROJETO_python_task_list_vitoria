@@ -28,12 +28,10 @@ def exibir_menu_usuario():
     print("\n----- MENU DE USUÁRIOS -----")
 
 
-tarefa1 = Tarefa("Comprar pão", "Na padaria")
-tarefa2 = Tarefa("Comprar casaco", "Na loja de roupas")
+tarefa1 = Tarefa("Minha tarefa", "é essa aqui")
 
-projeto1 = Projeto("Meu projeto", "Sei lá")
+print(tarefa1.to_dict())
 
-projeto1.adicionar_tarefa("Minha mais nova tarefa", "É isso aí")
+tarefa1.atualizar_status()
 
-
-print(projeto1.to_dict())
+print(tarefa1.to_dict())
