@@ -1,9 +1,6 @@
 # Importa biblioteca para trabalhar com datas
 from datetime import datetime
 
-# Importa classe com valores constantes
-import Constantes
-
 # Importando Tarefa
 from Tarefa import Tarefa
 
