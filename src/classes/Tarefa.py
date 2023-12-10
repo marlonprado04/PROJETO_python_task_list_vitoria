@@ -52,7 +52,7 @@ class Tarefa:
             self.data_conclusao = None
         else:
             # Atualiza o status da tarefa para concluída
-            self.status = PENDENTE
+            self.status = CONCLUIDA
             # Atualiza a data de conclusão para agora
             self.data_conclusao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -89,6 +89,6 @@ class Tarefa:
             "status": self.status,
             "data_criacao": self.data_criacao,
             "data_conclusao": self.data_conclusao,
-            "projeto": None,
-            "usuario_atribuido": None,
+            "projeto": None if self.projeto is None else self.projeto.obter_id(),
+            "usuario_atribuido": None if self.usuario_atribuido is None else self.usuario_atribuido.obter_id(),
         }
