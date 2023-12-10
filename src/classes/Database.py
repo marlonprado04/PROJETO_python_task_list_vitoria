@@ -44,17 +44,53 @@ class Database:
 
     # Adiciona informações do usuário ao arquivo
     def adicionar_usuario(self, usuario):
+        # Define o ID como tamanho da lista + 1 
+        usuario.id = len(self.dados["usuarios"]) + 1
         self.dados['usuarios'].append(usuario.to_dict())
         self.atualizar_json()
 
     # Adiciona informações do projeto ao arquivo
     def adicionar_projeto(self, projeto):
+        # Define o ID como tamanho da lista + 1 
+        projeto.id = len(self.dados["projetos"]) + 1
         self.dados['projetos'].append(projeto.to_dict())
         self.atualizar_json()
 
     # Adiciona informações da tarefa ao arquivo
     def adicionar_tarefa(self, tarefa):
+        # Define o ID como tamanho da lista + 1 
+        tarefa.id = len(self.dados["tarefas"]) + 1
         self.dados['tarefas'].append(tarefa.to_dict())
         self.atualizar_json()
 
-
+    # Consulta informações da tarefa de acordo com ID
+    def consultar_tarefa_por_id(self, id):
+        # Para cada tarefa dentro do objeto de tarefas
+        for tarefa in self.dados['tarefas']:
+            # Retorna a tarefa completa se o ID bater
+            if tarefa['id'] == id:
+                return tarefa
+        # Se não, retorna nada
+        return "Nenhuma tarefa encontrada."
+    
+    # Consulta informações do projeto de acordo com ID
+    def consultar_projeto_por_id(self, id):
+        # Para cada projeto dentro do objeto de projetos
+        for projeto in self.dados['projetos']:
+            # Retorna o projeto completo se o ID bater
+            if projeto['id'] == id:
+                return projeto
+        # Se não, retorna nada
+        return "Nenhum projeto encontrado."
+    
+    # Consultar informações do usuario de acordo com ID
+    def consultar_usuario_por_id(self, id):
+        # Para cada usuário dentro do objeto de usuários
+        for usuario in self.dados['usuarios']:
+            # Retorna os dados completos do usuário se o ID bater
+            if usuario["id"]== id:
+                return usuario
+        # Se não, retorna que não foi localizado
+        return "Nenhum usuário localizado."
+    
+    

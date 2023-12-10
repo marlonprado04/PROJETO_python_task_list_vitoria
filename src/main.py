@@ -40,7 +40,12 @@ nova_tarefa = Tarefa("Nova Tarefa")
 novo_projeto = Projeto("Novo projeto")
 novo_usuario = Usuario("Novo usuario")
 
+nova_tarefa1 = Tarefa("Minha nova tarefitcha")
+
 # Adicionando a tarefa ao banco de dados
 db.adicionar_tarefa(nova_tarefa)
-db.adicionar_projeto(novo_projeto)
-db.adicionar_usuario(novo_usuario)
+db.adicionar_tarefa(nova_tarefa)
+db.adicionar_tarefa(nova_tarefa)
+db.adicionar_tarefa(nova_tarefa1)
+
+print(db.consultar_tarefa_por_id(4))
