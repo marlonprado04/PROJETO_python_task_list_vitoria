@@ -2,19 +2,18 @@
 from datetime import datetime
 
 # Importa classe com valores constantes
-import config.Constantes as Constantes
-
+import Constantes as Constantes
 
 class Tarefa:
     # Define ID a ser compartilhado entre todas as instâncias da classe
-    _id_counter = 1
+    _id = 1
 
     # Define atributos da classe
     def __init__(self, titulo, descricao, status="Pendente"):
         # Atribui um ID único à tarefa
         self.tarefa_id = Tarefa._id_counter
         # Incrementa o contador de IDs
-        Tarefa._id_counter += 1
+        Tarefa._id += 1
         self.titulo = titulo
         self.descricao = descricao
         # Recebe o status padrão "pendente" ao criar uma nova tarefa
@@ -83,7 +82,7 @@ class Tarefa:
     # Trata os valores da classe para seguirem a estrutura de um arquivo .json
     def to_dict(self):
         return {
-            "tarefa_id": self.tarefa_id,
+            "id": self.tarefa_id,
             "titulo": self.titulo,
             "descricao": self.descricao,
             "status": self.status,

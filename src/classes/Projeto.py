@@ -1,5 +1,5 @@
 # Importa classe com valores constantes 
-from config.Constantes import Constantes
+from Constantes import Constantes
 
 class Projeto:
     

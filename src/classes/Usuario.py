@@ -1,7 +1,3 @@
-# Importa biblioteca para trabalhar com datas
-from datetime import datetime
-
-# Importando Tarefa
 from Tarefa import Tarefa
 
 class Usuario:

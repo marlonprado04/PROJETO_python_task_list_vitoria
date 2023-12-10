@@ -14,7 +14,6 @@ class Database:
             with open(self.nome_arquivo, "r") as arquivo:
                 # Lê o conteúdo do arquivo
                 conteudo = arquivo.read()
-
                 # Verifica se o arquivo não está vazio
                 if conteudo:
                     # Carrega e retorna os dados do arquivo JSON
@@ -30,7 +29,7 @@ class Database:
             # Se o arquivo não contém um JSON válido, retorna um banco de dados vazio
             return {"usuarios": [], "projetos": [], "tarefas": []}
 
-    # Cria o arquivo se ele não existir
+    # Cria o arquivo
     def _criar_arquivo(self):
         with open(self.nome_arquivo, "w") as arquivo:
             # Escreve um JSON vazio no arquivo

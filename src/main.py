@@ -1,5 +1,7 @@
 from classes.Database import Database
 from classes.Tarefa import Tarefa
+from classes.Usuario import Usuario
+from classes.Projeto import Projeto
 
 
 # Define função para exibir o menu principal
@@ -26,3 +28,9 @@ def exibir_menu_projeto():
 
 def exibir_menu_usuario():
     print("\n----- MENU DE USUÁRIOS -----")
+
+tarefa1 = Tarefa("Comprar pão", "Na padaria")
+tarefa2 = Tarefa("Comprar casaco", "Na loja de roupas")
+
+print(tarefa1.to_dict())
+print(tarefa2.to_dict())
