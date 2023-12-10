@@ -52,6 +52,7 @@ class Tarefa:
             # Atualiza a data de conclusão para agora
             self.data_conclusao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+
     # Trata os valores da classe para seguirem a estrutura de um arquivo .json
     def to_dict(self):
         return {
@@ -65,14 +66,28 @@ class Tarefa:
             "id_usuarios": None if self.id_usuarios is None else self.id_usuarios,
         }
     
-    # Cria método da classe para criar uma nova instância a partir dos dados de dicionário passados
+    # Faz o tratamento dos dados da tarefa para dados legíveis em uma linha
     @classmethod
-    def criar_tarefa_a_partir_de_dict(cls, dados_tarefa):
-        tarefa = cls(dados_tarefa['titulo'], dados_tarefa['status'])
-        tarefa.id = dados_tarefa['id']
-        tarefa.data_criacao = dados_tarefa['data_criacao']
-        tarefa.descricao = dados_tarefa['descricao']
-        tarefa.data_conclusao = dados_tarefa['data_conclusao']
-        tarefa.id_projetos = dados_tarefa['id_projetos']
-        tarefa.id_usuarios = dados_tarefa['id_usuarios']
+    def to_line(cls, dados):
+        id_str = f"ID: {dados['id']}" if 'id' in dados else "ID: N/A"
+        titulo_str = f"Titulo: {dados['titulo']}" if 'titulo' in dados else "Titulo: N/A"
+        descricao_str = f"Descrição: {dados['descricao']}" if 'descricao' in dados else "Descrição: N/A"
+        data_criacao_str = f"Criada em: {dados['data_criacao']}" if 'data_criacao' in dados else "Criada em: N/A"
+        status_str = f"Status: {dados['status']}" if 'status' in dados else "Status: N/A"
+        data_conclusao_str = f"Concluída em: {dados['data_conclusao']}" if 'data_conclusao' in dados else "Concluída em: N/A"
+        
+        return f"{id_str} | {titulo_str} | {descricao_str} | {data_criacao_str} | {status_str} | {data_conclusao_str}"
+
+    
+    # Cria uma nova instância a partir dos dados de dicionário passados
+    @classmethod
+    def criar_tarefa_a_partir_de_dict(cls, dados):
+        tarefa = cls(dados['titulo'], dados['status'])
+        tarefa.id = dados['id']
+        tarefa.data_criacao = dados['data_criacao']
+        tarefa.descricao = dados['descricao']
+        tarefa.data_conclusao = dados['data_conclusao']
+        tarefa.id_projetos = dados['id_projetos']
+        tarefa.id_usuarios = dados['id_usuarios']
         return tarefa
+    

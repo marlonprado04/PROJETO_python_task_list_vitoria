@@ -3,47 +3,172 @@ from classes.Projeto import Projeto
 from classes.Usuario import Usuario
 from classes.Database import Database
 
-# Define função para exibir o menu principal
-def exibir_menu_principal():
-    print("\n----- MENU PRINCIPAL -----")
-    print("1. Entrar em tarefas")
-    print("2. Entrar em projetos")
-    print("3. Entrar em usuários")
-    print("4. Sair\n")
-
-
-def exibir_menu_tarefa():
-    print("\n----- MENU DE TAREFAS -----")
-    print("1. Listar tarefas pendentes")
-    print("2. Listar tarefas concluídas ")
-    print("3. Atualizar status da tarefa")
-    print("3. Excluir tarefa")
-    print("4. Sair\n")
-
-
-def exibir_menu_projeto():
-    print("\n----- MENU DE PROJETOS -----")
-
-
-def exibir_menu_usuario():
-    print("\n----- MENU DE USUÁRIOS -----")
-
-
-
-# Exemplo de uso:
-
-# Criando uma instância da classe Database
+# Criando instância dos dados
 db = Database("./dados.json")
 
-# Criando uma instância da classe Tarefa
-projeto1 = Projeto("Projeto 1")
+tarefa = Tarefa("Tarefa criada por último")
+db.adicionar_tarefa(tarefa)
 
-# Adicionando a tarefa ao banco de dados
-db.adicionar_projeto(projeto1)
+# Pula o número informado de linhas
+def pula_linhas(numero_de_linhas):
+    print('\n' * numero_de_linhas)
 
-# Criando instância da tarefa a partir dos valores do banco
-projeto2 = Projeto.criar_projeto_a_partir_de_dict(db.consultar_projeto_por_id(1))
+# Apresenta o menu de tarefas
+def menu_tarefas():
+    while True:
+        # Exibe o menu de opções
+        pula_linhas(1)
+        
+        print("----- MENU DE TAREFAS -----")
+        print("1. Listar tarefas")
+        print("2. Atualizar informações de alguma tarefa")
+        print("3. Atualizar status de alguma tarefa")
+        print("4. Remover tarefa")
+        print("5. Voltar ao menu principal")
+        print("6. Encerrar programa")
+        
+        pula_linhas(1)
+        
+        # Armazena opção digitada pelo usuário
+        opcao_tarefa = input("Digite a opção desejada para tarefas: ")
+        
+        pula_linhas(1)
 
-projeto2.adicionar_tarefa(1)
+        if opcao_tarefa == '1':     
+            # Armazena resultado da listagem de tarefas em uma variável 
+            lista_de_tarefas = db.listar_tarefas()     
+            
+            # Imprime na tela as informações de cada tarefa na lista
+            for tarefa in lista_de_tarefas:
+                print(Tarefa.to_line(tarefa))
+                
+            break
+        elif opcao_tarefa == '2':
+            # Armazena resultado da listagem de tarefas em uma variável 
+            lista_de_tarefas = db.listar_tarefas()     
+            
+            # Imprime na tela as informações de cada tarefa na lista
+            for tarefa in lista_de_tarefas:
+                print(Tarefa.to_line(tarefa))
+            
+            # Recebe o número da tarefa desejada
+            pula_linhas(1)
+            numero = input("Digite o ID da tarefa: ")
+            pula_linhas(1)
+            
+            # Informa os dados da tarefa selecionada
+            print("A tarefa selecionada foi: ")
+            pula_linhas(1)
+            tarefa_no_banco = db.consultar_tarefa_por_id(numero)
+            print(Tarefa.to_line(tarefa_no_banco))
+            pula_linhas(1)
+            
+            # Armazena informações atualizadas
+            titulo = input("Digite o novo título: ") 
+            descricao = input("Digite a nova descrição: ")
+            
+            # Cria uma instância com os valores extraídos do JSON
+            tarefa = Tarefa.criar_tarefa_a_partir_de_dict(tarefa_no_banco)
+            
+            # Armazena os novos valores na tarefa instanciada
+            tarefa.atualizar_descricao(descricao)
+            tarefa.atualizar_titulo(titulo)
+            
+            # Armazena a informação atualizada no JSON
+            db.atualizar_tarefa(numero, tarefa) 
+            break
+        elif opcao_tarefa == '3':
+            # Armazena resultado da listagem de tarefas em uma variável 
+            lista_de_tarefas = db.listar_tarefas()     
+            
+            # Imprime na tela as informações de cada tarefa na lista
+            for tarefa in lista_de_tarefas:
+                print(Tarefa.to_line(tarefa))
+            
+            # Recebe o número da tarefa desejada
+            pula_linhas(1)
+            numero = input("Digite o ID da tarefa: ")
+            pula_linhas(1)
+            
+            # Informa os dados da tarefa selecionada
+            print("A tarefa selecionada foi: ")
+            pula_linhas(1)
+            tarefa_no_banco = db.consultar_tarefa_por_id(numero)
+            print(Tarefa.to_line(tarefa_no_banco))
+            pula_linhas(1)
+                        
+            # Cria uma instância com os valores extraídos do JSON
+            tarefa = Tarefa.criar_tarefa_a_partir_de_dict(tarefa_no_banco)
+            
+            # Atualiza o status da tarefa instanciada
+            tarefa.atualizar_status()
+            
+            # Armazena a informação atualizada no JSON
+            db.atualizar_tarefa(numero, tarefa) 
+            
+            # Informa que a tarefa teve o status atualizado
+            pula_linhas(1)
+            print(f"Tarefa: {tarefa_no_banco['titulo']} teve o status atualizado para {tarefa_no_banco['status']}")
+            pula_linhas(1)
+            
+            break
+        elif opcao_tarefa == '4':
+            # Armazena resultado da listagem de tarefas em uma variável 
+            lista_de_tarefas = db.listar_tarefas()     
+            
+            # Imprime na tela as informações de cada tarefa na lista
+            for tarefa in lista_de_tarefas:
+                print(Tarefa.to_line(tarefa))
+            
+            # Recebe o número da tarefa desejada
+            pula_linhas(1)
+            numero = input("Digite o ID da tarefa: ")
+            pula_linhas(1)
+            
+            # Informa os dados da tarefa selecionada
+            print("A tarefa selecionada foi: ")
+            pula_linhas(1)
+            tarefa_no_banco = db.consultar_tarefa_por_id(numero)
+            print(Tarefa.to_line(tarefa_no_banco))
+            pula_linhas(1)
+            
+            # Exclui tarefa selecionada
+            db.excluir_tarefa(numero)
+            break
+        elif opcao_tarefa == '5':
+            break
+        elif opcao_tarefa == '6':
+            exit()
+        else:
+            print("Opção inválida. Tente novamente.")
 
-db.atualizar_projeto(1, projeto2)
+
+while True:
+    pula_linhas(1)
+    print("----- MENU PRINCIPAL -----")
+    print("1. Menu de tarefas")
+    print("2. Menu de projetos")
+    print("3. Menu de usuários")
+    print("4. Encerrar programa")
+    pula_linhas(1)
+    
+    opcao = input("Digite a opção desejada: ")
+
+    if opcao == '1':
+        menu_tarefas()
+
+    elif opcao == '2':
+        while True:
+            exibir_menu_projeto()
+            # Adicione lógica para o menu de projetos
+
+    elif opcao == '3':
+        exibir_menu_usuario()
+        # Adicione lógica para o menu de usuários
+
+    elif opcao == '4':
+        print("Saindo do programa. Até logo!")
+        break
+
+    else:
+        print("Opção inválida. Tente novamente.")

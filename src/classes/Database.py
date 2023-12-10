@@ -1,5 +1,7 @@
-import json
 import os
+import json
+import time
+
 class Database:
     # Inicia a classe informando o nome do arquivo
     def __init__(self, caminho_do_arquivo):
@@ -41,6 +43,8 @@ class Database:
         with open(self.caminho_do_arquivo, 'w') as file:
             #  Adiciona os dados dentro do arquivo
             json.dump(self.dados, file, indent=4)
+        # Recarrega os dados após a atualização
+        self.dados = self.carregar_json()
 
     # Adiciona informações do usuário ao arquivo
     def adicionar_usuario(self, usuario):
@@ -68,7 +72,7 @@ class Database:
         # Para cada tarefa dentro do objeto de tarefas
         for tarefa in self.dados['tarefas']:
             # Retorna a tarefa completa se o ID bater
-            if tarefa['id'] == id:
+            if tarefa['id'] == int(id):
                 return tarefa
         # Se não, retorna nada
         return "Nenhuma tarefa encontrada."
@@ -78,7 +82,7 @@ class Database:
         # Para cada projeto dentro do objeto de projetos
         for projeto in self.dados['projetos']:
             # Retorna o projeto completo se o ID bater
-            if projeto['id'] == id:
+            if projeto['id'] == int(id):
                 return projeto
         # Se não, retorna nada
         return "Nenhum projeto encontrado."
@@ -88,7 +92,7 @@ class Database:
         # Para cada usuário dentro do objeto de usuários
         for usuario in self.dados['usuarios']:
             # Retorna os dados completos do usuário se o ID bater
-            if usuario["id"]== id:
+            if usuario["id"]== int(id):
                 return usuario
         # Se não, retorna que não foi localizado
         return "Nenhum usuário localizado."
@@ -97,11 +101,11 @@ class Database:
     def atualizar_tarefa(self, id, dados):
         # Procura pela tarefa com o ID específico
         for tarefa in self.dados['tarefas']:
-            if tarefa['id'] == id:
+            if tarefa['id'] == int(id):
                 # Atualiza os dados da tarefa existente com os novos dados
                 tarefa.update(dados.to_dict())
                 self.atualizar_json()
-                return
+                return "Tarefa atualizada com sucesso!"
         # Se o ID da tarefa não for encontrado, printa uma mensagem
         print(f"Tarefa com ID {id} não encontrada.")
         
@@ -109,11 +113,11 @@ class Database:
     def atualizar_projeto(self, id, dados):
         # Procura pelo projeto com o ID específico
         for projeto in self.dados['projetos']:
-            if projeto['id'] == id:
+            if projeto['id'] == int(id):
                 # Atualiza os dados existentes com os novos dados
                 projeto.update(dados.to_dict())
                 self.atualizar_json()
-                return
+                return "Projeto atualizado com sucesso"
         # Se o ID do projeto não for encontrado, printa uma mensagem
         print(f"Projeto com ID {id} não encontrada.")
         
@@ -121,10 +125,37 @@ class Database:
     def atualizar_usuario(self, id, dados):
         # Procura pelo usuário com o ID específico
         for usuario in self.dados['usuarios']:
-            if usuario['id'] == id:
+            if usuario['id'] == int(id):
                 # Atualiza os dados existentes com os novos dados
                 usuario.update(dados.to_dict())
                 self.atualizar_json()
-                return
+                return "Usuário atualizado com sucesso"
         # Se o ID do usuário não for encontrado, printa uma mensagem
         print(f"Usuário com ID {id} não encontrada.")
+        
+    # Lista todas as tarefas cadastradas
+    def listar_tarefas(self):
+        # Cria variável para armazenar lista de tarefas
+        lista_de_tarefas = []
+        # Verifica se existem tarefas dentro do json
+        if len(self.dados["tarefas"]) > 0:
+            # Adiciona cada tarefa dentro do json na lista de tarefas
+            for tarefa in self.dados["tarefas"]:
+                lista_de_tarefas.append(tarefa)
+            # Retorna lista de tarefas prenchida
+            return lista_de_tarefas
+        # Caso esteja vazio, retorna que nenhuma tarefa foi localizada
+        return "Nenhuma tarefa localizada"
+    
+    # Exclui a tarefa do arquivo com base no ID
+    def excluir_tarefa(self, id):
+        # Procura pela tarefa com o ID específico
+        for indice, tarefa in enumerate(self.dados['tarefas']):
+            if tarefa['id'] == int(id):
+                # Remove a tarefa da lista
+                del self.dados['tarefas'][indice]
+                self.atualizar_json()
+                print(f"Tarefa com ID {id} excluída com sucesso.")
+                return
+        # Se o ID da tarefa não for encontrado, printa uma mensagem
+        print(f"Tarefa com ID {id} não encontrada.")

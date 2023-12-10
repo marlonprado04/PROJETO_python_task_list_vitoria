@@ -1,0 +1,66 @@
+{
+    "usuarios": [],
+    "projetos": [],
+    "tarefas": [
+        {
+            "id": 1,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Pendente",
+            "data_criacao": "2023-12-10 20:18:17",
+            "data_conclusao": null,
+            "id_projetos": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 2,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Pendente",
+            "data_criacao": "2023-12-10 20:18:37",
+            "data_conclusao": null,
+            "id_projetos": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 3,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Pendente",
+            "data_criacao": "2023-12-10 20:19:44",
+            "data_conclusao": null,
+            "id_projetos": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 4,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Conclu\u00edda",
+            "data_criacao": "2023-12-10 20:20:13",
+            "data_conclusao": "2023-12-10 20:20:30",
+            "id_projetos": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 5,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Conclu\u00edda",
+            "data_criacao": "2023-12-10 20:24:32",
+            "data_conclusao": "2023-12-10 20:25:10",
+            "id_projetos": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 6,
+            "titulo": "Tarefa criada por \u00faltimo",
+            "descricao": null,
+            "status": "Conclu\u00edda",
+            "data_criacao": "2023-12-10 20:26:12",
+            "data_conclusao": "2023-12-10 20:26:28",
+            "id_projetos": [],
+            "id_usuarios": []
+        }
+    ]
+}
