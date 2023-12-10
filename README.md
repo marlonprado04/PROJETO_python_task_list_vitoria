@@ -51,7 +51,7 @@ JSON.
         - Usuário: Seleciona uma tarefa:
           - Sistema: Lista as opções para a tarefa selecionada:
             - Atualizar nome ou descrição da tarefa
-            - Atualizar status da tarefa
+            - Concluir tarefa
             - Atribuir tarefa a um usuário
             - Atribuir tarefa a um projeto
             - Retornar ao menu anterior
@@ -80,10 +80,37 @@ JSON.
           - Usuário: seleciona um usuário:
             - Atualizar nome e email do usuário
             - Listar tarefas atribuídas ao usuário (todos os campos + projeto em que se encontra)
-            - Listar projetos atribuídos ao usuário
             - Retornar ao menu anterior
             - Encerrar o sistema
         - Selecionar voltar
           - Sistema: retorna ao menu anterior
         - Selecionar encerrar o sistema
           - Encerra na hora
+
+## Lista de métodos (UML)
+
+Tarefas:
+
+  - Listar tarefas
+  - Atualizar nome
+  - Atualizar descrição
+  - Concluir tarefa
+  - Atribuir tarefa a um usuário
+  - Atribuir tarefa a um projeto
+  - Excluir tarefa
+
+Projetos:
+
+  - Listar projetos
+  - Atualizar nome
+  - Atualizar descrição
+  - Listar tarefas do projeto
+  - Excluir projeto
+
+Usuários:
+
+  - Listar usuários
+  - Atualizar nome
+  - Atualizar email
+  - Listar tarefas atribuídas
+  - Excluir usuário
