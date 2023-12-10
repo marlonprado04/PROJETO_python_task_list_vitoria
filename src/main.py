@@ -1,7 +1,8 @@
 # Importando as classes
-from Tarefa import Tarefa
-from Projeto import Projeto
-from Usuario import Usuario
+from classes.Tarefa import Tarefa
+from classes.Projeto import Projeto
+from classes.Usuario import Usuario
+
 import Menus
 
 # Loop principal do programa

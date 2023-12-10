@@ -2,7 +2,7 @@
 from datetime import datetime
 
 # Importa classe com valores constantes 
-import Constantes
+from config.Constantes import Constantes
 
 class Tarefa:
     # Define atributos da classe
