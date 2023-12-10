@@ -12,7 +12,7 @@ class Tarefa:
     # Define atributos da classe
     def __init__(self, titulo, descricao, status=PENDENTE):
         # Atribui um ID único à tarefa
-        self.tarefa_id = Tarefa._id
+        self.id = Tarefa._id
         # Incrementa o contador de IDs
         Tarefa._id += 1
         self.titulo = titulo
@@ -83,12 +83,12 @@ class Tarefa:
     # Trata os valores da classe para seguirem a estrutura de um arquivo .json
     def to_dict(self):
         return {
-            "id": self.tarefa_id,
+            "id": self.id,
             "titulo": self.titulo,
             "descricao": self.descricao,
             "status": self.status,
             "data_criacao": self.data_criacao,
             "data_conclusao": self.data_conclusao,
-            "projeto": None if self.projeto is None else self.projeto.obter_id(),
-            "usuario_atribuido": None if self.usuario_atribuido is None else self.usuario_atribuido.obter_id(),
+            "id_projetos": None if self.projeto is None else self.projeto.obter_id(),
+            "id_usuarios": None if self.usuario_atribuido is None else self.usuario_atribuido.obter_id(),
         }

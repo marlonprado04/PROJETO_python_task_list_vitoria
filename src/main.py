@@ -1,4 +1,6 @@
 from classes.Tarefa import Tarefa
+from classes.Projeto import Projeto
+
 
 # Define função para exibir o menu principal
 def exibir_menu_principal():
@@ -29,5 +31,9 @@ def exibir_menu_usuario():
 tarefa1 = Tarefa("Comprar pão", "Na padaria")
 tarefa2 = Tarefa("Comprar casaco", "Na loja de roupas")
 
-print(tarefa1.to_dict())
-print(tarefa2.to_dict())
+projeto1 = Projeto("Meu projeto", "Sei lá")
+
+projeto1.adicionar_tarefa("Minha mais nova tarefa", "É isso aí")
+
+
+print(projeto1.to_dict())
