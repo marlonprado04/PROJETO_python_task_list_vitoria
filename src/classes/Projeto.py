@@ -1,5 +1,5 @@
 # Importa classe com valores constantes 
-from Constantes import Constantes
+from Tarefa import CONCLUIDA
 
 class Projeto:
     
@@ -22,7 +22,7 @@ class Projeto:
     def mostrar_status_do_projeto(self):
         # Conta o número de tarefas com status de Concluída
         tarefas_concluidas = sum(
-            1 for tarefa in self.tarefas if tarefa.status == Constantes.CONCLUIDA
+            1 for tarefa in self.tarefas if tarefa.status == CONCLUIDA
         )
         # Retorna mensagem com conclusão do projeto
         return f"Conclusão do projeto: {tarefas_concluidas}/{self.total_tarefas}"

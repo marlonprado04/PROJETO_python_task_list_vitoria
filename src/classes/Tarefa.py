@@ -1,17 +1,18 @@
 # Importa biblioteca para trabalhar com datas
 from datetime import datetime
 
-# Importa classe com valores constantes
-import Constantes as Constantes
+# Define constantes para os status das tarefas
+PENDENTE = "Pendente"
+CONCLUIDA = "Concluída"
 
 class Tarefa:
     # Define ID a ser compartilhado entre todas as instâncias da classe
     _id = 1
 
     # Define atributos da classe
-    def __init__(self, titulo, descricao, status="Pendente"):
+    def __init__(self, titulo, descricao, status=PENDENTE):
         # Atribui um ID único à tarefa
-        self.tarefa_id = Tarefa._id_counter
+        self.tarefa_id = Tarefa._id
         # Incrementa o contador de IDs
         Tarefa._id += 1
         self.titulo = titulo
@@ -44,14 +45,14 @@ class Tarefa:
     # Atualiza status e data de conclusão da tarefa dinamicamente
     def atualizar_status(self):
         # Verifica se o status da tarefa está como concluído
-        if self.status == Constantes.CONCLUIDA:
+        if self.status == PENDENTE:
             # Atualiza o status da tarefa para pendente
-            self.status = Constantes.PENDENTE
+            self.status = PENDENTE
             # Atualiza a data de conclusão para vazio
             self.data_conclusao = None
         else:
             # Atualiza o status da tarefa para concluída
-            self.status = Constantes.CONCLUIDA
+            self.status = PENDENTE
             # Atualiza a data de conclusão para agora
             self.data_conclusao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

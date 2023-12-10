@@ -1,13 +1,4 @@
-import sys
-
-sys.path.append(r"../src")
-
-
-from classes.Database import Database
 from classes.Tarefa import Tarefa
-from classes.Usuario import Usuario
-from classes.Projeto import Projeto
-
 
 # Define função para exibir o menu principal
 def exibir_menu_principal():
