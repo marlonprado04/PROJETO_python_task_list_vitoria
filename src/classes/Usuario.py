@@ -1,4 +1,4 @@
-from Tarefa import Tarefa
+from .Tarefa import Tarefa
 
 class Usuario:
     
@@ -6,57 +6,48 @@ class Usuario:
     _id = 1
     
     # Definindo estrutura da classe
-    def __init__(self, nome, email, database):
+    def __init__(self, nome):
         # Atribui um ID único ao usuário
-        self.tarefa_id = Usuario._id
+        self.id = Usuario._id
         self.nome = nome
-        self.email = email
-        # Inicializa a lista de tarefas atribuídas como vazia
-        self.tarefas_atribuidas = []
-        # Mantém uma referência à instância de Database
-        self.database = database
+        # Inicializa os demais campos vazios
+        self.email = None
+        self.id_tarefas = []
+        self.id_projetos = []
 
     # Adiciona tarefa na lista de tarefas atribuídas ao usuário
-    def criar_tarefa(self, titulo, descricao):
-        # Cria uma nova instância de Tarefa
-        nova_tarefa = Tarefa(titulo, descricao)
+    def adicionar_tarefa(self, id):
         # Adiciona a tarefa instanciada na lista de tarefas atribuídas
-        self.tarefas_atribuidas.append(nova_tarefa.tarefa_id)
-        # Salva os dados no arquivo JSON
-        self.database.adicionar_tarefa(nova_tarefa.to_dict())
-
-    # Adiciona uma tarefa já existente na lista de tarefas atribuídas ao usuário
-    def atribuir_tarefa(self, id_tarefa):
-        self.tarefas_atribuidas.append(id_tarefa)
-        # Salva os dados no arquivo JSON
-        self.database.atualizar_usuario(self.to_dict())
+        self.id_tarefas.append(id)
 
     # Lista tarefas do usuário
     def listar_tarefas_atribuidas(self):
         # Verifica se usuário não possui tarefas atribuídas e imprime mensagem
-        if not self.tarefas_atribuidas:
+        if not self.id_tarefas:
             return "O usuário não possui tarefas atribuídas."
-
-        # Cria variável para armazenar as strings formatadas das tarefas
-        lista_tarefas = []
-
+        
+        lista_de_tarefas = []
         # Intera sobre todos os IDs de tarefa atribuídas
-        for id_tarefa in self.tarefas_atribuidas:
-            tarefa = self.database.obter_tarefa_por_id(id_tarefa)
-            if tarefa:
-                lista_tarefas.append(f"ID: {tarefa['id']}, Título: {tarefa['titulo']}")
-
+        for id in self.id_tarefas:
+            lista_de_tarefas.append(f"ID: {id}, Título: {Tarefa[id].obter_titulo()}")
+            
         # Concatena as strings em uma única mensagem
-        lista_tarefas_str = "\n".join(lista_tarefas)
+        lista_de_tarefas_str = "\n".join(lista_de_tarefas)
 
         # Retorna a lista de tarefas atribuídas ao usuário
-        return f"Tarefas atribuídas ao usuário {self.nome}:\n{lista_tarefas_str}"
+        return f"Tarefas atribuídas ao usuário {self.nome}:\n{lista_de_tarefas_str}"
 
     # Atualiza o status da tarefa
-    def atualizar_status(self, id_tarefa):
-        tarefa = self.database.obter_tarefa_por_id(id_tarefa)
-        if tarefa:
-            # Marca a tarefa como concluída
-            tarefa["status"] = "Concluída"
-            # Salva os dados no arquivo JSON
-            self.database.atualizar_tarefa(tarefa)
+    def atualizar_status(self, id):
+        # Atualiza o status da tarefa com o ID passado
+        Tarefa[id].atualizar_status()
+
+    # Trata os valores da classe para seguirem a estrutura de um arquivo .json
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nome": self.nome,
+            "email": self.email,
+            "id_tarefas": self.id_tarefas,
+            "id_projetos": self.id_projetos,
+        }
