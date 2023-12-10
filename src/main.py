@@ -19,13 +19,16 @@ def menu_tarefas():
         # Exibe o menu de opções
         pula_linhas(1)
         
+        print("---------------------------")
         print("----- MENU DE TAREFAS -----")
-        print("1. Listar tarefas")
-        print("2. Atualizar informações de alguma tarefa")
-        print("3. Atualizar status de alguma tarefa")
-        print("4. Remover tarefa")
-        print("5. Voltar ao menu principal")
-        print("6. Encerrar programa")
+        print("---------------------------")
+        print("1. Listar")
+        print("2. Adicionar")
+        print("3. Atualizar informações")
+        print("4. Atualizar status")
+        print("5. Remover")
+        print("6. Voltar ao menu principal")
+        print("e. Encerrar programa")
         
         pula_linhas(1)
         
@@ -44,6 +47,21 @@ def menu_tarefas():
                 
             break
         elif opcao_tarefa == '2':
+            # Recebe informações para armazenar na nova tarefa 
+            pula_linhas(1)
+            titulo = input("Digite o título: ")
+            descricao = input("Digite a descrição: ")
+            pula_linhas(1)
+            
+            # Cria uma nova tarefa e atualiza sua descrição em seguida
+            tarefa = Tarefa(titulo)
+            tarefa.atualizar_descricao(descricao)
+            
+            # Adiciona tarefa criada no arquivo json e printa o resultado da execução
+            print(db.adicionar_tarefa(tarefa))
+                        
+            break
+        elif opcao_tarefa == '3':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
             
@@ -77,7 +95,7 @@ def menu_tarefas():
             # Armazena a informação atualizada no JSON
             db.atualizar_tarefa(numero, tarefa) 
             break
-        elif opcao_tarefa == '3':
+        elif opcao_tarefa == '4':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
             
@@ -112,7 +130,7 @@ def menu_tarefas():
             pula_linhas(1)
             
             break
-        elif opcao_tarefa == '4':
+        elif opcao_tarefa == '5':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
             
@@ -135,9 +153,9 @@ def menu_tarefas():
             # Exclui tarefa selecionada
             db.excluir_tarefa(numero)
             break
-        elif opcao_tarefa == '5':
-            break
         elif opcao_tarefa == '6':
+            break
+        elif opcao_tarefa == 'e':
             exit()
         else:
             print("Opção inválida. Tente novamente.")

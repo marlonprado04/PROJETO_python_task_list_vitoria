@@ -52,6 +52,7 @@ class Database:
         usuario.id = len(self.dados["usuarios"]) + 1
         self.dados['usuarios'].append(usuario.to_dict())
         self.atualizar_json()
+        return "Usuário adicionado com sucesso"
 
     # Adiciona informações do projeto ao arquivo
     def adicionar_projeto(self, projeto):
@@ -59,6 +60,7 @@ class Database:
         projeto.id = len(self.dados["projetos"]) + 1
         self.dados['projetos'].append(projeto.to_dict())
         self.atualizar_json()
+        return "Projeto adicionado com sucesso"
 
     # Adiciona informações da tarefa ao arquivo
     def adicionar_tarefa(self, tarefa):
@@ -66,6 +68,7 @@ class Database:
         tarefa.id = len(self.dados["tarefas"]) + 1
         self.dados['tarefas'].append(tarefa.to_dict())
         self.atualizar_json()
+        return "Tarefa adicionada com sucesso"
 
     # Consulta informações da tarefa de acordo com ID
     def consultar_tarefa_por_id(self, id):
