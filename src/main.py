@@ -1,5 +1,6 @@
 from classes.Tarefa import Tarefa
 from classes.Projeto import Projeto
+from classes.Usuario import Usuario
 from classes.Database import Database
 
 # Define função para exibir o menu principal
@@ -32,10 +33,14 @@ def exibir_menu_usuario():
 # Exemplo de uso:
 
 # Criando uma instância da classe Database
-db = Database()
+db = Database("./dados.json")
 
 # Criando uma instância da classe Tarefa
 nova_tarefa = Tarefa("Nova Tarefa")
+novo_projeto = Projeto("Novo projeto")
+novo_usuario = Usuario("Novo usuario")
 
 # Adicionando a tarefa ao banco de dados
 db.adicionar_tarefa(nova_tarefa)
+db.adicionar_projeto(novo_projeto)
+db.adicionar_usuario(novo_usuario)
