@@ -40,3 +40,50 @@ JSON.
 **Data de Entrega:** 12/dezembro
 
 **Critérios de Avaliação:** Você será avaliado com base na funcionalidade do seu sistema, no uso adequado dos conceitos de POO e na organização e legibilidade do seu código.
+
+## O fluxo do sistema
+
+- Sistema: pergunta se o usuário deseja verificar a lista de TAREFAS, PROJETOS ou USUÁRIOS:
+  - Usuário: seleciona a LISTA DE TAREFAS:
+    - Sistema: Imprime na tela a lista com todas as tarefas contendo nome, descrição, data de criação, status, data de conclusão, projeto e usuário atribuído
+    - Sistema: Apresenta ao usuário as opções de:
+      - Selecionar uma tarefa:
+        - Usuário: Seleciona uma tarefa:
+          - Sistema: Lista as opções para a tarefa selecionada:
+            - Atualizar nome ou descrição da tarefa
+            - Atualizar status da tarefa
+            - Atribuir tarefa a um usuário
+            - Atribuir tarefa a um projeto
+            - Retornar ao menu anterior
+            - Encerrar sistema
+      - Selecionar voltar
+        - Sistema: retorna ao menu anterior
+      - Selecionar encerrar o sistema
+        - Encerra na hora
+  - Usuário: seleciona LISTA DE PROJETOS:
+    - Sistema: Imprime a lista de projetos contendo nome, número de tarefas pendente, número de tarefas total, percentual de conclusão
+    - Sistema: apresenta ao usuário as opções de:
+      - Selecionar um projeto:
+        - Usuário seleciona um projeto:
+          - Sistema: lista as opções para o projeto selecionado
+            - Atualizar nome e descrição do projeto
+            - Listar tarefas do projeto
+            - Excluir projeto
+      - Selecionar voltar
+        - Sistema: retorna ao menu anterior
+      - Selecionar encerrar o sistema
+        - Encerra na hora
+  - Usuário: seleciona LISTA DE USUÁRIOS:
+    - Sistema: Imprime na tela a lista com os nomes e emails dos usuários
+      - Sistema: apresenta ao usuário as opções de:
+        - Selecionar um usuário
+          - Usuário: seleciona um usuário:
+            - Atualizar nome e email do usuário
+            - Listar tarefas atribuídas ao usuário (todos os campos + projeto em que se encontra)
+            - Listar projetos atribuídos ao usuário
+            - Retornar ao menu anterior
+            - Encerrar o sistema
+        - Selecionar voltar
+          - Sistema: retorna ao menu anterior
+        - Selecionar encerrar o sistema
+          - Encerra na hora
