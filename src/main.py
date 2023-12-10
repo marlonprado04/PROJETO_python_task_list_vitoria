@@ -1,3 +1,6 @@
+from classes.Database import Database
+from classes.Tarefa import Tarefa
+
 
 # Define função para exibir o menu principal
 def exibir_menu_principal():
@@ -6,7 +9,7 @@ def exibir_menu_principal():
     print("2. Entrar em projetos")
     print("3. Entrar em usuários")
     print("4. Sair\n")
-    
+
 
 def exibir_menu_tarefa():
     print("\n----- MENU DE TAREFAS -----")
@@ -16,8 +19,10 @@ def exibir_menu_tarefa():
     print("3. Excluir tarefa")
     print("4. Sair\n")
 
+
 def exibir_menu_projeto():
     print("\n----- MENU DE PROJETOS -----")
+
 
 def exibir_menu_usuario():
     print("\n----- MENU DE USUÁRIOS -----")

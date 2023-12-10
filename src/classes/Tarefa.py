@@ -2,7 +2,7 @@
 from datetime import datetime
 
 # Importa classe com valores constantes
-from config.Constantes import Constantes
+import config.Constantes as Constantes
 
 
 class Tarefa:
@@ -79,3 +79,16 @@ class Tarefa:
     # Obtém o usuário associado à tarefa
     def obter_usuario(self):
         return self.usuario_atribuido
+
+    # Trata os valores da classe para seguirem a estrutura de um arquivo .json
+    def to_dict(self):
+        return {
+            "tarefa_id": self.tarefa_id,
+            "titulo": self.titulo,
+            "descricao": self.descricao,
+            "status": self.status,
+            "data_criacao": self.data_criacao,
+            "data_conclusao": self.data_conclusao,
+            "projeto": None,
+            "usuario_atribuido": None,
+        }
