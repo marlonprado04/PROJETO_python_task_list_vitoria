@@ -40,10 +40,10 @@ class Tarefa:
 
     # Atualiza status e data de conclusão da tarefa dinamicamente
     def atualizar_status(self):
-        # Verifica se o status da tarefa está como concluído
-        if self.status == PENDENTE:
+        # Verifica se o status da tarefa está como concluída
+        if self.status == CONCLUIDA:
             # Atualiza o status da tarefa para pendente
-            self.status = CONCLUIDA
+            self.status = PENDENTE
             # Atualiza a data de conclusão para vazio
             self.data_conclusao = None
         else:

@@ -93,4 +93,38 @@ class Database:
         # Se não, retorna que não foi localizado
         return "Nenhum usuário localizado."
     
-    
+    # Modifica informações da tarefa no arquivo com base no ID
+    def atualizar_tarefa(self, id, dados):
+        # Procura pela tarefa com o ID específico
+        for tarefa in self.dados['tarefas']:
+            if tarefa['id'] == id:
+                # Atualiza os dados da tarefa existente com os novos dados
+                tarefa.update(dados.to_dict())
+                self.atualizar_json()
+                return
+        # Se o ID da tarefa não for encontrado, printa uma mensagem
+        print(f"Tarefa com ID {id} não encontrada.")
+        
+    # Modifica informações do projeto no arquivo com base no ID
+    def atualizar_projeto(self, id, dados):
+        # Procura pelo projeto com o ID específico
+        for projeto in self.dados['projetos']:
+            if projeto['id'] == id:
+                # Atualiza os dados existentes com os novos dados
+                projeto.update(dados.to_dict())
+                self.atualizar_json()
+                return
+        # Se o ID do projeto não for encontrado, printa uma mensagem
+        print(f"Projeto com ID {id} não encontrada.")
+        
+    # Modifica informações do usuário no arquivo com base no ID
+    def atualizar_usuario(self, id, dados):
+        # Procura pelo usuário com o ID específico
+        for usuario in self.dados['usuarios']:
+            if usuario['id'] == id:
+                # Atualiza os dados existentes com os novos dados
+                usuario.update(dados.to_dict())
+                self.atualizar_json()
+                return
+        # Se o ID do usuário não for encontrado, printa uma mensagem
+        print(f"Usuário com ID {id} não encontrada.")

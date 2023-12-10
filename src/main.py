@@ -36,20 +36,14 @@ def exibir_menu_usuario():
 db = Database("./dados.json")
 
 # Criando uma instância da classe Tarefa
-nova_tarefa = Tarefa("Nova Tarefa")
-novo_projeto = Projeto("Novo projeto")
-novo_usuario = Usuario("Novo usuario")
+projeto1 = Projeto("Projeto 1")
 
 # Adicionando a tarefa ao banco de dados
+db.adicionar_projeto(projeto1)
 
-db.adicionar_projeto(novo_projeto)
-db.adicionar_tarefa(nova_tarefa)
-db.adicionar_usuario(novo_usuario)
+# Criando instância da tarefa a partir dos valores do banco
+projeto2 = Projeto.criar_projeto_a_partir_de_dict(db.consultar_projeto_por_id(1))
 
-outra_tarefa = Tarefa.criar_tarefa_a_partir_de_dict(db.consultar_tarefa_por_id(1))
-outro_projeto = Projeto.criar_projeto_a_partir_de_dict(db.consultar_projeto_por_id(1))
-outro_usuario = Usuario.criar_usuario_a_partir_de_dict(db.consultar_usuario_por_id(1))
+projeto2.adicionar_tarefa(1)
 
-print(nova_tarefa.titulo, outra_tarefa.titulo)
-print(novo_usuario.nome, outro_usuario.nome)
-print(novo_projeto.titulo, outro_projeto.titulo)
+db.atualizar_projeto(1, projeto2)
