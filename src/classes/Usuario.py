@@ -2,15 +2,11 @@ from .Tarefa import Tarefa
 
 class Usuario:
     
-    # Define ID a ser compartilhado entre todas as instâncias da classe
-    _id = 1
-    
     # Definindo estrutura da classe
     def __init__(self, nome):
-        # Atribui um ID único ao usuário
-        self.id = Usuario._id
         self.nome = nome
         # Inicializa os demais campos vazios
+        self.id = None
         self.email = None
         self.id_tarefas = []
         self.id_projetos = []
@@ -51,3 +47,13 @@ class Usuario:
             "id_tarefas": self.id_tarefas,
             "id_projetos": self.id_projetos,
         }
+
+     # Cria método da classe para criar uma nova instância a partir dos dados de dicionário passados
+    @classmethod
+    def criar_usuario_a_partir_de_dict(cls, dados):
+        usuario = cls(dados['nome'])
+        usuario.id = dados["id"]
+        usuario.email = dados['email']
+        usuario.id_tarefas = dados["id_tarefas"]
+        usuario.id_projetos = dados["id_projetos"]
+        return usuario

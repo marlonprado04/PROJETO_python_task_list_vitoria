@@ -3,18 +3,12 @@ from .Tarefa import CONCLUIDA
 from .Tarefa import Tarefa
 
 class Projeto:
-    # Define ID a ser compartilhado entre todas as instâncias da classe
-    _id = 1
-    
     # Definindo variáveis da classe
     def __init__(self, titulo):
-        # Atribui um ID único ao projeto
-        self.id = Projeto._id
-        # Incrementa o contador de IDs
-        Projeto._id += 1
         self.titulo = titulo
         self.descricao = None
         # Cria lista de tarefas como vazia
+        self.id = None
         self.id_tarefas = []
         self.id_usuarios = []
 
@@ -45,3 +39,13 @@ class Projeto:
             "id_tarefas": self.id_tarefas,
             "id_usuarios": self.id_usuarios
         }
+
+    # Cria método da classe para criar uma nova instância a partir dos dados de dicionário passados
+    @classmethod
+    def criar_projeto_a_partir_de_dict(cls, dados):
+        projeto = cls(dados['titulo'])
+        projeto.descricao = dados["descricao"]
+        projeto.id = dados['id']
+        projeto.id_tarefas = dados["id_tarefas"]
+        projeto.id_usuarios = dados["id_usuarios"]
+        return projeto

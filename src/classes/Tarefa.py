@@ -64,3 +64,15 @@ class Tarefa:
             "id_projetos": None if self.id_projetos is None else self.id_projetos,
             "id_usuarios": None if self.id_usuarios is None else self.id_usuarios,
         }
+    
+    # Cria método da classe para criar uma nova instância a partir dos dados de dicionário passados
+    @classmethod
+    def criar_tarefa_a_partir_de_dict(cls, dados_tarefa):
+        tarefa = cls(dados_tarefa['titulo'], dados_tarefa['status'])
+        tarefa.id = dados_tarefa['id']
+        tarefa.data_criacao = dados_tarefa['data_criacao']
+        tarefa.descricao = dados_tarefa['descricao']
+        tarefa.data_conclusao = dados_tarefa['data_conclusao']
+        tarefa.id_projetos = dados_tarefa['id_projetos']
+        tarefa.id_usuarios = dados_tarefa['id_usuarios']
+        return tarefa
