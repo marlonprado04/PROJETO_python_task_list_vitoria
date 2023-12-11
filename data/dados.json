@@ -20,18 +20,6 @@
     ],
     "tarefas": [
         {
-            "id": 1,
-            "titulo": "1111",
-            "descricao": "1111",
-            "status": "Pendente",
-            "data_criacao": "2023-12-11 17:32:08",
-            "data_conclusao": null,
-            "id_projetos": [
-                1
-            ],
-            "id_usuarios": []
-        },
-        {
             "id": 2,
             "titulo": "222",
             "descricao": "222",
@@ -44,16 +32,16 @@
             "id_usuarios": []
         },
         {
-            "id": 3,
-            "titulo": "333",
-            "descricao": "333",
+            "id": 4,
+            "titulo": "Errei",
+            "descricao": "Sei l�",
             "status": "Pendente",
-            "data_criacao": "2023-12-11 17:32:15",
+            "data_criacao": "2023-12-11 18:22:39",
             "data_conclusao": null,
-            "id_projetos": [
-                3
-            ],
-            "id_usuarios": []
+            "id_projetos": [],
+            "id_usuarios": [
+                1
+            ]
         }
     ]
 }
