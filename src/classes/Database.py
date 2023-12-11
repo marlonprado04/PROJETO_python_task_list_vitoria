@@ -181,3 +181,31 @@ class Database:
             return lista_de_projetos
         # Caso esteja vazio, retorna que nenhum projeto foi localizado
         return "Nenhuma projeto localizado"
+
+    # Lista as tarefas que não fazem parte do projeto
+    def listar_tarefas_dentro_do_projeto(self, id):
+        # Converte o ID recebido em int
+        id = int(id)
+        
+        # Obtém o projeto correspondente ao ID
+        projeto = self.consultar_projeto_por_id(id)
+        
+        # Cria uma lista de tarefas dentro do projeto
+        lista_de_tarefas = [self.consultar_tarefa_por_id(id_tarefa) for id_tarefa in projeto["id_tarefas"]]
+        
+        # Retorna a lista de tarefas
+        return lista_de_tarefas or "O projeto não tem tarefas definidas"
+
+    # Lista as tarefas que fazem parte do projeto
+    def listar_tarefas_fora_do_projeto(self, id):
+        # Converte o ID recebido em int
+        id = int(id)
+        
+        # Obtém a lista completa de tarefas
+        todas_tarefas = self.listar_tarefas()
+        
+        # Cria uma lista de tarefas que não fazem parte do projeto
+        tarefas_fora = [tarefa for tarefa in todas_tarefas if id not in tarefa["id_projetos"]]
+        
+        # Retorna a lista de tarefas que não estão no projeto, ou None se a lista estiver vazia
+        return tarefas_fora or "Não existem tarefas fora do projeto"

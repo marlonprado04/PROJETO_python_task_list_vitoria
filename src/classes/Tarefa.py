@@ -38,6 +38,18 @@ class Tarefa:
     def obter_descricao(self):
         return self.descricao
 
+    # Adiciona um novo projeto no fim da lista se ele não existir
+    def adicionar_projeto(self, id):
+        # Verifica se o id do projeto não está na lista de ID 
+        if id not in self.id_projetos:
+            # Adiciona o ID do projeto na lista de ID
+            self.id_projetos.append(id)
+            
+    # Renove o projeto na lista de projetos da tarefa
+    def remover_projeto(self, id):
+        # Remove o ID do item 
+        self.id_projetos.remove(id)
+    
     # Atualiza status e data de conclusão da tarefa dinamicamente
     def atualizar_status(self):
         # Verifica se o status da tarefa está como concluída
@@ -75,8 +87,10 @@ class Tarefa:
         data_criacao_str = f"Criada em: {dados['data_criacao']}" if 'data_criacao' in dados else "Criada em: N/A"
         status_str = f"Status: {dados['status']}" if 'status' in dados else "Status: N/A"
         data_conclusao_str = f"Concluída em: {dados['data_conclusao']}" if 'data_conclusao' in dados else "Concluída em: N/A"
-        
-        return f"{id_str} | {titulo_str} | {descricao_str} | {data_criacao_str} | {status_str} | {data_conclusao_str}"
+        id_usuarios_str = f"ID Usuários: {dados['id_usuarios']}" if 'id_usuarios' in dados else "ID Usuários: N/A"
+        id_projetos_str = f"ID Projetos: {dados['id_projetos']}" if 'id_projetos' in dados else "ID Projetos: N/A"
+
+        return f"{id_str} | {titulo_str} | {descricao_str} | {data_criacao_str} | {status_str} | {data_conclusao_str} | {id_projetos_str} | {id_usuarios_str}"
 
     
     # Cria uma nova instância a partir dos dados de dicionário passados

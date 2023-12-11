@@ -253,6 +253,58 @@ def menu_projeto():
             print(db.atualizar_projeto(numero, projeto)) 
             break
         elif opcao_projeto == '4':
+            # Armazena resultado da listagem de projetos em uma variável 
+            lista_de_projetos = db.listar_projetos()     
+            
+            # Imprime na tela as informações de cada projeto na lista
+            for projeto in lista_de_projetos:
+                print(Projeto.to_line(projeto))
+            
+            # Recebe o ID do projeto desejado
+            pula_linhas(1)
+            id_projeto = input("Digite o ID do projeto: ")
+            pula_linhas(1)
+            
+            # Informa os dados do projeto selecionado
+            print("O projeto selecionado foi: ")
+            pula_linhas(1)
+            projeto_no_banco = db.consultar_projeto_por_id(id_projeto)
+            print(Projeto.to_line(projeto_no_banco))
+            pula_linhas(1)
+            
+            # Imprime mensagem de listas de tarefas
+            pula_linhas(1)
+            print("Lista de tarefas que podem ser adicionadas:")
+            pula_linhas(1)
+
+            # Varre a lista de tarefas fora do projeto selecionado
+            for tarefa in db.listar_tarefas_fora_do_projeto(id_projeto):
+                # Printa todas as tarefas na estrutura de tarefa
+                print(Tarefa.to_line(tarefa))
+                
+            # Recebe o ID da tarefa a ser adicionada
+            pula_linhas(1)
+            id_tarefa = input("Digite o ID da tarefa: ")
+            pula_linhas(1)
+            
+            # Armazena os dados da tarefa extraídos do banco através do ID
+            tarefa_no_banco = db.consultar_tarefa_por_id(id_tarefa)
+            # Cria uma instância de tarefas a partir do dicionário
+            tarefa = Tarefa.criar_tarefa_a_partir_de_dict(tarefa_no_banco)
+            # Adiciona o ID do projeto na tarefa
+            tarefa.adicionar_projeto(id_projeto)
+            
+            # Cria instância do projeto a partir dos dados do banco
+            projeto = Projeto.criar_projeto_a_partir_de_dict(projeto_no_banco)
+            projeto.adicionar_tarefa(id_tarefa)
+            
+            # Atualizando informações no banco de dados
+            db.atualizar_tarefa(id_tarefa, tarefa)
+            db.atualizar_projeto(id_projeto, projeto)
+            
+            # Imprime mensagem
+            print(f'Tarefa: "{tarefa.obter_titulo()}" adicionada ao projeto "{projeto.obter_titulo()}".')
+            
             break
         elif opcao_projeto == '5':
             break
