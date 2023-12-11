@@ -4,7 +4,7 @@ from classes.Usuario import Usuario
 from classes.Database import Database
 
 # Criando instância dos dados
-db = Database("./dados.json")
+db = Database("./data/dados.json")
 
 
 # Adiciona dados de exemplo em Tarefas e Projetos para testes
