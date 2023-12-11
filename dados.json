@@ -1,0 +1,28 @@
+{
+    "usuarios": [],
+    "projetos": [
+        {
+            "id": 1,
+            "titulo": "Meu primeiro projeto",
+            "descricao": null,
+            "id_tarefas": [
+                1,
+                3,
+                5
+            ],
+            "id_usuarios": []
+        }
+    ],
+    "tarefas": [
+        {
+            "id": 1,
+            "titulo": "Tarefa criada por último",
+            "descricao": null,
+            "status": "Pendente",
+            "data_criacao": "2023-12-11 12:17:33",
+            "data_conclusao": null,
+            "id_projetos": [],
+            "id_usuarios": []
+        }
+    ]
+}
