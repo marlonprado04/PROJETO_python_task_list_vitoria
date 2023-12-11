@@ -162,3 +162,17 @@ class Database:
                 return
         # Se o ID da tarefa não for encontrado, printa uma mensagem
         print(f"Tarefa com ID {id} não encontrada.")
+
+    # Lista todos os projetos
+    def listar_projetos(self):
+        # Cria variável para armazenar lista de projetos
+        lista_de_projetos= []
+        # Verifica se existem projetos dentro do json
+        if len(self.dados["projetos"]) > 0:
+            # Adiciona cada projeto dentro do json na lista de projetos
+            for projeto in self.dados["projetos"]:
+                lista_de_projetos.append(projeto)
+            # Retorna lista de projetos prenchida
+            return lista_de_projetos
+        # Caso esteja vazio, retorna que nenhum projeto foi localizado
+        return "Nenhuma projeto localizado"

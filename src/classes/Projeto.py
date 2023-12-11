@@ -12,6 +12,22 @@ class Projeto:
         self.id_tarefas = []
         self.id_usuarios = []
 
+    # Atualiza o título de acordo com valor passado
+    def atualizar_titulo(self, novo_nome):
+        self.titulo = novo_nome
+
+    # Obtém valor do título
+    def obter_titulo(self):
+        return self.titulo
+
+    # Atualiza a descrição de acordo com valor passado
+    def atualizar_descricao(self, nova_descricao):
+        self.descricao = nova_descricao
+
+    # Obtém valor da descrição
+    def obter_descricao(self):
+        return self.descricao
+
     # Adiciona o ID de uma tarefa ao projeto
     def adicionar_tarefa(self, id_tarefa):
         # Cria instância da tarefa e adiciona 
@@ -49,3 +65,15 @@ class Projeto:
         projeto.id_tarefas = dados["id_tarefas"]
         projeto.id_usuarios = dados["id_usuarios"]
         return projeto
+    
+    
+    # Faz o tratamento dos dados do projeto para dados legíveis em uma linha
+    @classmethod
+    def to_line(cls, dados):
+        id_str = f"ID: {dados['id']}" if 'id' in dados else "ID: N/A"
+        titulo_str = f"Titulo: {dados['titulo']}" if 'titulo' in dados else "Titulo: N/A"
+        descricao_str = f"Descrição: {dados['descricao']}" if 'descricao' in dados else "Descrição: N/A"
+        id_tarefas_str = f"ID Tarefas: {dados['id_tarefas']}" if 'id_tarefas' in dados else "ID Tarefas: N/A"
+        id_usuarios_str = f"ID Usuários: {dados['id_usuarios']}" if 'id_usuarios' in dados else "ID Usuários: N/A"
+        
+        return f"{id_str} | {titulo_str} | {descricao_str} | {id_tarefas_str} | {id_usuarios_str}"

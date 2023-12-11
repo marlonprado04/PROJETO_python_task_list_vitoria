@@ -9,6 +9,12 @@ db = Database("./dados.json")
 tarefa = Tarefa("Tarefa criada por último")
 db.adicionar_tarefa(tarefa)
 
+projeto = Projeto("Meu primeiro projeto")
+projeto.adicionar_tarefa(1)
+projeto.adicionar_tarefa(3)
+projeto.adicionar_tarefa(5)
+db.adicionar_projeto(projeto)
+
 # Pula o número informado de linhas
 def pula_linhas(numero_de_linhas):
     print('\n' * numero_de_linhas)
@@ -22,11 +28,11 @@ def menu_tarefas():
         print("---------------------------")
         print("----- MENU DE TAREFAS -----")
         print("---------------------------")
-        print("1. Listar")
-        print("2. Adicionar")
-        print("3. Atualizar informações")
-        print("4. Atualizar status")
-        print("5. Remover")
+        print("1. Listar tarefa")
+        print("2. Adicionar tarefa")
+        print("3. Atualizar informações da tarefa")
+        print("4. Atualizar status da tarefa")
+        print("5. Remover tarefa")
         print("6. Voltar ao menu principal")
         print("e. Encerrar programa")
         
@@ -92,8 +98,9 @@ def menu_tarefas():
             tarefa.atualizar_descricao(descricao)
             tarefa.atualizar_titulo(titulo)
             
-            # Armazena a informação atualizada no JSON
-            db.atualizar_tarefa(numero, tarefa) 
+            # Armazena a informação atualizada no JSON e printa mensagem
+            pula_linhas(1)
+            print(db.atualizar_tarefa(numero, tarefa)) 
             break
         elif opcao_tarefa == '4':
             # Armazena resultado da listagem de tarefas em uma variável 
@@ -160,10 +167,113 @@ def menu_tarefas():
         else:
             print("Opção inválida. Tente novamente.")
 
+# Apresenta o menu de projeto
+def menu_projeto():
+    while True:
+        # Exibe o menu de opções
+        pula_linhas(1)
+        
+        print("----------------------------")
+        print("----- MENU DE PROJETOS -----")
+        print("----------------------------")
+        print("1. Listar projetos")
+        print("2. Adicionar projeto")
+        print("3. Atualizar informações de um projeto")
+        print("4. Adicionar tarefa a um projeto")
+        print("5. Remover tarefa de um projeto")
+        print("6. Listar tarefas de um projeto")
+        print("6. Remover projeto")
+        print("7. Voltar ao menu principal")
+        print("e. Encerrar programa")
+        
+        pula_linhas(1)
+        
+        # Armazena opção digitada pelo usuário
+        opcao_projeto = input("Digite a opção desejada para projetos: ")
+        
+        pula_linhas(1)
+
+        if opcao_projeto == '1': 
+            # Armazena resultado da listagem de projetos em uma variável 
+            lista_de_projetos = db.listar_projetos()     
+            
+            # Imprime na tela as informações de cada projeto na lista
+            for projeto in lista_de_projetos:
+                print(Projeto.to_line(projeto))
+            break
+        elif opcao_projeto == '2':
+            # Recebe informações para armazenar no novo projeto 
+            pula_linhas(1)
+            titulo = input("Digite o título: ")
+            descricao = input("Digite a descrição: ")
+            pula_linhas(1)
+            
+            # Cria um novo projeto e atualiza sua descrição em seguida
+            projeto = Tarefa(titulo)
+            projeto.atualizar_descricao(descricao)
+            
+            # Adiciona projeto criado no arquivo json e printa o resultado da execução
+            print(db.adicionar_projeto(projeto))
+            break
+        elif opcao_projeto == '3':
+            # Armazena resultado da listagem de projetos em uma variável 
+            lista_de_projetos = db.listar_projetos()     
+            
+            # Imprime na tela as informações de cada projeto na lista
+            for projeto in lista_de_projetos:
+                print(Projeto.to_line(projeto))
+            
+            # Recebe o ID do projeto desejado
+            pula_linhas(1)
+            numero = input("Digite o ID do projeto: ")
+            pula_linhas(1)
+            
+            # Informa os dados da projeto selecionado
+            print("O projeto selecionado foi: ")
+            pula_linhas(1)
+            projeto_no_banco = db.consultar_projeto_por_id(numero)
+            print(Projeto.to_line(projeto_no_banco))
+            pula_linhas(1)
+            
+            # Armazena informações atualizadas
+            titulo = input("Digite o novo título: ") 
+            descricao = input("Digite a nova descrição: ")
+            
+            # Cria uma instância com os valores extraídos do JSON
+            projeto = Projeto.criar_projeto_a_partir_de_dict(projeto_no_banco)
+            
+            # Armazena os novos valores no projeto instanciado
+            projeto.atualizar_descricao(descricao)
+            projeto.atualizar_titulo(titulo)
+            
+            # Armazena a informação atualizada no JSON e printa mensagem
+            pula_linhas(1)
+            print(db.atualizar_projeto(numero, projeto)) 
+            break
+        elif opcao_projeto == '4':
+            break
+        elif opcao_projeto == '5':
+            break
+        elif opcao_projeto == '6':
+            break
+        elif opcao_projeto == '7':
+            break
+        elif opcao_projeto == '8':
+            break
+        elif opcao_projeto == 'e':
+            exit()
+        else:
+            print("Opção inválida. Tente novamente.")
+
+# Apresenta o menu de usuario
+def menu_usuario():
+    exit()
 
 while True:
     pula_linhas(1)
-    print("----- MENU PRINCIPAL -----")
+    print("-----------------------------")
+    print("------ MENU PRINCIPAL -------")
+    print("-----------------------------")
     print("1. Menu de tarefas")
     print("2. Menu de projetos")
     print("3. Menu de usuários")
@@ -176,13 +286,10 @@ while True:
         menu_tarefas()
 
     elif opcao == '2':
-        while True:
-            exibir_menu_projeto()
-            # Adicione lógica para o menu de projetos
+        menu_projeto()
 
     elif opcao == '3':
-        exibir_menu_usuario()
-        # Adicione lógica para o menu de usuários
+        menu_usuario()
 
     elif opcao == '4':
         print("Saindo do programa. Até logo!")
