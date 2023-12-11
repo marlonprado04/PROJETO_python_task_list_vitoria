@@ -46,7 +46,7 @@ def menu_tarefas():
             for tarefa in lista_de_tarefas:
                 print(Tarefa.to_line(tarefa))
                 
-            break
+            pass
         elif opcao_tarefa == '2':
             # Recebe informações para armazenar na nova tarefa 
             pula_linhas(1)
@@ -61,7 +61,7 @@ def menu_tarefas():
             # Adiciona tarefa criada no arquivo json e printa o resultado da execução
             print(db.adicionar_tarefa(tarefa))
                         
-            break
+            pass
         elif opcao_tarefa == '3':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
@@ -96,7 +96,7 @@ def menu_tarefas():
             # Armazena a informação atualizada no JSON e printa mensagem
             pula_linhas(1)
             print(db.atualizar_tarefa(numero, tarefa)) 
-            break
+            pass
         elif opcao_tarefa == '4':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
@@ -131,7 +131,7 @@ def menu_tarefas():
             print(f"Tarefa: {tarefa_no_banco['titulo']} teve o status atualizado para {tarefa_no_banco['status']}")
             pula_linhas(1)
             
-            break
+            pass
         elif opcao_tarefa == '5':
             # Armazena resultado da listagem de tarefas em uma variável 
             lista_de_tarefas = db.listar_tarefas()     
@@ -154,7 +154,7 @@ def menu_tarefas():
             
             # Exclui tarefa selecionada
             db.excluir_tarefa(numero)
-            break
+            pass
         elif opcao_tarefa == 'v':
             break
         elif opcao_tarefa == 'e':
@@ -195,7 +195,7 @@ def menu_projeto():
             # Imprime na tela as informações de cada projeto na lista
             for projeto in lista_de_projetos:
                 print(Projeto.to_line(projeto))
-            break
+            pass
         elif opcao_projeto == '2':
             # Recebe informações para armazenar no novo projeto 
             pula_linhas(1)
@@ -209,7 +209,7 @@ def menu_projeto():
             
             # Adiciona projeto criado no arquivo json e printa o resultado da execução
             print(db.adicionar_projeto(projeto))
-            break
+            pass
         elif opcao_projeto == '3':
             # Armazena resultado da listagem de projetos em uma variável 
             lista_de_projetos = db.listar_projetos()     
@@ -244,7 +244,7 @@ def menu_projeto():
             # Armazena a informação atualizada no JSON e printa mensagem
             pula_linhas(1)
             print(db.atualizar_projeto(numero, projeto)) 
-            break
+            pass
         elif opcao_projeto == '4':
             # Armazena resultado da listagem de projetos em uma variável 
             lista_de_projetos = db.listar_projetos()     
@@ -298,7 +298,7 @@ def menu_projeto():
             # Imprime mensagem
             print(f'Tarefa: "{tarefa.obter_titulo()}" adicionada ao projeto "{projeto.obter_titulo()}".')
             
-            break
+            pass
         elif opcao_projeto == '5':
             # Armazena resultado da listagem de projetos em uma variável 
             lista_de_projetos = db.listar_projetos()     
@@ -354,7 +354,7 @@ def menu_projeto():
             
             # Imprime mensagem
             print(f'Tarefa: "{tarefa.obter_titulo()}" removida do projeto "{projeto.obter_titulo()}".')
-            break
+            pass
         elif opcao_projeto == '6':
             # Armazena resultado da listagem de projetos em uma variável 
             lista_de_projetos = db.listar_projetos()     
@@ -387,7 +387,7 @@ def menu_projeto():
             for tarefa in lista_de_tarefas:
                 print(f"{Tarefa.to_line(tarefa)}")
                 
-            break
+            pass
         elif opcao_projeto == '7':
             # Armazena resultado da listagem de projetos em uma variável 
             lista_de_projetos= db.listar_projetos()     
@@ -410,7 +410,7 @@ def menu_projeto():
             
             # Exclui projeto selecionado
             db.excluir_projeto(numero)
-            break
+            pass
         elif opcao_projeto == 'v':
             break
         elif opcao_projeto == 'e':
