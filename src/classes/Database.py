@@ -193,8 +193,8 @@ class Database:
         # Cria lista para armazenar os IDs
         lista_de_tarefas = []
         
-        # Verifica se lista de tarefas do projeto é maior que zero
-        if projeto["id_tarefas"] > 0:
+        # Verifica se o tamanho da lista de tarefas do projeto é maior que zero
+        if len(projeto["id_tarefas"]) > 0:
             # Mapeia todos os IDs dentro do array de ID de tarefas
             for id_tarefa in projeto["id_tarefas"]:
                 # Adiciona a tarefa pesquisada pelo ID

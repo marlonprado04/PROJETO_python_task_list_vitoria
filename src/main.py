@@ -324,14 +324,17 @@ def menu_projeto():
             print("Lista de tarefas que podem ser removidas:")
             pula_linhas(1)
 
+            # Armazena a lista de tarefas dentro do projeto
+            lista_de_tarefas = db.listar_tarefas_dentro_do_projeto(id_projeto)
+            
             # Varre a lista de tarefas fora do projeto selecionado
-            for tarefa in db.listar_tarefas_dentro_do_projeto(id_projeto):
+            for tarefa in lista_de_tarefas:
                 # Printa todas as tarefas na estrutura de tarefa
                 print(Tarefa.to_line(tarefa))
                 
             # Recebe o ID da tarefa a ser removida
             pula_linhas(1)
-            id_tarefa = input("Digite o ID da tarefa: ")
+            id_tarefa = input("Digite o ID da tarefa a ser removida: ")
             pula_linhas(1)
             
             # Armazena os dados da tarefa extraídos do banco através do ID
