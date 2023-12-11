@@ -385,10 +385,31 @@ def menu_projeto():
             
             # Imprime as tarefas da lista
             for tarefa in lista_de_tarefas:
-                print(f"-> {Tarefa.to_line(tarefa)}")
+                print(f"{Tarefa.to_line(tarefa)}")
                 
             break
         elif opcao_projeto == '7':
+            # Armazena resultado da listagem de projetos em uma variável 
+            lista_de_projetos= db.listar_projetos()     
+            
+            # Imprime na tela as informações de cada projeto na lista
+            for projeto in lista_de_projetos:
+                print(Projeto.to_line(projeto))
+            
+            # Recebe o número do projeto desejado
+            pula_linhas(1)
+            numero = input("Digite o ID do projeto: ")
+            pula_linhas(1)
+            
+            # Informa os dados do projeto selecionado
+            print("O projeto selecionada foi: ")
+            pula_linhas(1)
+            projeto_no_banco = db.consultar_projeto_por_id(numero)
+            print(Projeto.to_line(projeto_no_banco))
+            pula_linhas(1)
+            
+            # Exclui projeto selecionado
+            db.excluir_projeto(numero)
             break
         elif opcao_projeto == '8':
             break

@@ -16,16 +16,6 @@
             "descricao": "11",
             "id_tarefas": [],
             "id_usuarios": []
-        },
-        {
-            "id": 3,
-            "titulo": "222",
-            "descricao": "22",
-            "id_tarefas": [
-                2,
-                3
-            ],
-            "id_usuarios": []
         }
     ],
     "tarefas": [

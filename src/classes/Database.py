@@ -157,9 +157,13 @@ class Database:
 
     # Exclui a tarefa do arquivo com base no ID
     def excluir_tarefa(self, id):
+        
+        # Converte o ID em int
+        id = int(id)
+        
         # Procura pela tarefa com o ID específico
         for indice, tarefa in enumerate(self.dados["tarefas"]):
-            if tarefa["id"] == int(id):
+            if tarefa["id"] == id:
                 # Remove a tarefa da lista
                 del self.dados["tarefas"][indice]
                 self.atualizar_json()
@@ -226,3 +230,20 @@ class Database:
                     
         # Retorna a lista de tarefas que não estão no projeto
         return tarefas_fora_do_projeto
+
+    # Exclui o projeto do arquivo com base no ID fornecido
+    def excluir_projeto(self, id):
+        
+        # Converte o ID pra int 
+        id = int(id)
+        
+        # Procura pelo projeto com o ID específico
+        for indice, projeto in enumerate(self.dados["projetos"]):
+            if projeto["id"] == id:
+                # Remove a tarefa da lista
+                del self.dados["projetos"][indice]
+                self.atualizar_json()
+                print(f"Projeto com ID {id} excluído com sucesso.")
+                return
+        # Se o ID do projeto não for encontrado, printa uma mensagem
+        print(f"Projeto com ID {id} não encontrada.")
