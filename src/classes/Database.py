@@ -42,7 +42,7 @@ class Database:
         # Abre o arquivo passado e atualiza os dados
         with open(self.caminho_do_arquivo, 'w') as file:
             #  Adiciona os dados dentro do arquivo
-            json.dump(self.dados, file, indent=4)
+            json.dump(self.dados, file,encode_ascii=False, indent=4)
         # Recarrega os dados após a atualização
         self.dados = self.carregar_json()
 
