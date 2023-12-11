@@ -4,6 +4,17 @@ Projeto de Task List implementado para Vitória Batista da DINFO
 
 O objetivo deste projeto é criar uma ferramenta para gerenciar Usuários, Projetos e Tarefas.
 
+## Índice
+
+- [Lista de tarefas em Python](#lista-de-tarefas-em-python)
+  - [Índice](#índice)
+  - [Enunciado](#enunciado)
+  - [Esboço do fluxo do sistema](#esboço-do-fluxo-do-sistema)
+  - [Esboço da lista de métodos (UML)](#esboço-da-lista-de-métodos-uml)
+  - [Informações do projeto](#informações-do-projeto)
+    - [Programas e versões](#programas-e-versões)
+    - [Para usar o programa](#para-usar-o-programa)
+
 ## Enunciado
 
 O enunciado se encontra [neste link](./.docs/escopo.jpeg) e abaixo:
@@ -41,7 +52,7 @@ JSON.
 
 **Critérios de Avaliação:** Você será avaliado com base na funcionalidade do seu sistema, no uso adequado dos conceitos de POO e na organização e legibilidade do seu código.
 
-## O fluxo do sistema
+## Esboço do fluxo do sistema
 
 - Sistema: pergunta se o usuário deseja verificar a lista de TAREFAS, PROJETOS ou USUÁRIOS:
   - Usuário: seleciona a LISTA DE TAREFAS:
@@ -87,7 +98,7 @@ JSON.
         - Selecionar encerrar o sistema
           - Encerra na hora
 
-## Lista de métodos (UML)
+## Esboço da lista de métodos (UML)
 
 Tarefas:
 
@@ -114,3 +125,22 @@ Usuários:
   - Atualizar email
   - Listar tarefas atribuídas
   - Excluir usuário
+
+## Informações do projeto
+
+### Programas e versões
+
+**Versão do Python utilizada:** 3.12.1
+**IDE Utilizada:** Visual Studio Code
+
+### Para usar o programa
+
+Siga os passos abaixo para o bom funcionamento do programa:
+
+1. Tenha instalado e configurado o Python 3 (ou superior) na sua máquina
+2. Baixe esse repositório localmente em sua máquina
+3. Execute com o Python 3 o arquivo `main.py` localizado dentro da pasta `src` do projeto
+   1. Com isso, o programa irá criar um arquivo na seguinte estrutura `data/dados.json`
+   2. Para o bom funcionamento do código, não exclua o arquivo, pois se trata da persistência de dados (banco de dados)
+4. Agora dentro da tela de menu do sistema crie sua primeira tarefa
+5. A partir daí faça o que desejar
