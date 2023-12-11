@@ -29,9 +29,15 @@ class Projeto:
         return self.descricao
 
     # Adiciona o ID de uma tarefa ao projeto
-    def adicionar_tarefa(self, id_tarefa):
-        # Cria instância da tarefa e adiciona 
-        self.id_tarefas.append(id_tarefa)
+    def adicionar_tarefa(self, id):
+       # Verifica se o id da tarefa não está na lista de ID 
+        if id not in self.id_tarefas:
+            # Adiciona o ID da tarefa na lista de ID
+            self.id_tarefas.append(id)
+            
+    # Renove o ID de uma tarefa do projeto
+    def remover_tarefa(self, id):
+        self.id_tarefas.remove(id)
 
     # Retorna status do projeto
     def mostrar_status_do_projeto(self):
