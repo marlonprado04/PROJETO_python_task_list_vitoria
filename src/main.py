@@ -348,6 +348,10 @@ def menu_projeto():
             projeto = Projeto.criar_projeto_a_partir_de_dict(projeto_no_banco)
             projeto.remover_tarefa(id_tarefa)
             
+            # Atualiza valores no banco de dados
+            db.atualizar_projeto(id_projeto, projeto)
+            db.atualizar_tarefa(id_tarefa, tarefa)
+            
             # Imprime mensagem
             print(f'Tarefa: "{tarefa.obter_titulo()}" removida do projeto "{projeto.obter_titulo()}".')
             break
