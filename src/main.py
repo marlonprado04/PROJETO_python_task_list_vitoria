@@ -6,6 +6,8 @@ from classes.Database import Database
 # Criando instância dos dados
 db = Database("./dados.json")
 
+
+# Adiciona dados de exemplo em Tarefas e Projetos para testes
 tarefa = Tarefa("Tarefa criada por último")
 db.adicionar_tarefa(tarefa)
 
