@@ -51,21 +51,7 @@ class Database:
         # Recarrega os dados após a atualização
         self.dados = self.carregar_json()
 
-    # Adiciona informações do usuário ao arquivo
-    def adicionar_usuario(self, usuario):
-        # Define o ID como tamanho da lista + 1
-        usuario.id = len(self.dados["usuarios"]) + 1
-        self.dados["usuarios"].append(usuario.to_dict())
-        self.atualizar_json()
-        return "Usuário adicionado com sucesso"
-
-    # Adiciona informações do projeto ao arquivo
-    def adicionar_projeto(self, projeto):
-        # Define o ID como tamanho da lista + 1
-        projeto.id = len(self.dados["projetos"]) + 1
-        self.dados["projetos"].append(projeto.to_dict())
-        self.atualizar_json()
-        return "Projeto adicionado com sucesso"
+    # ------- OPERAÇÕES COM TAREFAS -------
 
     # Adiciona informações da tarefa ao arquivo
     def adicionar_tarefa(self, tarefa):
@@ -74,36 +60,6 @@ class Database:
         self.dados["tarefas"].append(tarefa.to_dict())
         self.atualizar_json()
         return "Tarefa adicionada com sucesso"
-
-    # Consulta informações da tarefa de acordo com ID
-    def consultar_tarefa_por_id(self, id):
-        # Para cada tarefa dentro do objeto de tarefas
-        for tarefa in self.dados["tarefas"]:
-            # Retorna a tarefa completa se o ID bater
-            if tarefa["id"] == int(id):
-                return tarefa
-        # Se não, retorna nada
-        return "Nenhuma tarefa encontrada."
-
-    # Consulta informações do projeto de acordo com ID
-    def consultar_projeto_por_id(self, id):
-        # Para cada projeto dentro do objeto de projetos
-        for projeto in self.dados["projetos"]:
-            # Retorna o projeto completo se o ID bater
-            if projeto["id"] == int(id):
-                return projeto
-        # Se não, retorna nada
-        return "Nenhum projeto encontrado."
-
-    # Consultar informações do usuario de acordo com ID
-    def consultar_usuario_por_id(self, id):
-        # Para cada usuário dentro do objeto de usuários
-        for usuario in self.dados["usuarios"]:
-            # Retorna os dados completos do usuário se o ID bater
-            if usuario["id"] == int(id):
-                return usuario
-        # Se não, retorna que não foi localizado
-        return "Nenhum usuário localizado."
 
     # Modifica informações da tarefa no arquivo com base no ID
     def atualizar_tarefa(self, id, dados):
@@ -116,30 +72,6 @@ class Database:
                 return "Tarefa atualizada com sucesso!"
         # Se o ID da tarefa não for encontrado, printa uma mensagem
         print(f"Tarefa com ID {id} não encontrada.")
-
-    # Modifica informações do projeto no arquivo com base no ID
-    def atualizar_projeto(self, id, dados):
-        # Procura pelo projeto com o ID específico
-        for projeto in self.dados["projetos"]:
-            if projeto["id"] == int(id):
-                # Atualiza os dados existentes com os novos dados
-                projeto.update(dados.to_dict())
-                self.atualizar_json()
-                return "Projeto atualizado com sucesso"
-        # Se o ID do projeto não for encontrado, printa uma mensagem
-        print(f"Projeto com ID {id} não encontrada.")
-
-    # Modifica informações do usuário no arquivo com base no ID
-    def atualizar_usuario(self, id, dados):
-        # Procura pelo usuário com o ID específico
-        for usuario in self.dados["usuarios"]:
-            if usuario["id"] == int(id):
-                # Atualiza os dados existentes com os novos dados
-                usuario.update(dados.to_dict())
-                self.atualizar_json()
-                return "Usuário atualizado com sucesso"
-        # Se o ID do usuário não for encontrado, printa uma mensagem
-        print(f"Usuário com ID {id} não encontrada.")
 
     # Lista todas as tarefas cadastradas
     def listar_tarefas(self):
@@ -171,6 +103,26 @@ class Database:
         # Se o ID da tarefa não for encontrado, printa uma mensagem
         print(f"Tarefa com ID {id} não encontrada.")
 
+    # Consulta informações da tarefa de acordo com ID
+    def consultar_tarefa_por_id(self, id):
+        # Para cada tarefa dentro do objeto de tarefas
+        for tarefa in self.dados["tarefas"]:
+            # Retorna a tarefa completa se o ID bater
+            if tarefa["id"] == int(id):
+                return tarefa
+        # Se não, retorna nada
+        return "Nenhuma tarefa encontrada."
+
+    # ------- OPERAÇÕES COM PROJETOS -------
+
+    # Adiciona informações do projeto ao arquivo
+    def adicionar_projeto(self, projeto):
+        # Define o ID como tamanho da lista + 1
+        projeto.id = len(self.dados["projetos"]) + 1
+        self.dados["projetos"].append(projeto.to_dict())
+        self.atualizar_json()
+        return "Projeto adicionado com sucesso"
+
     # Lista todos os projetos
     def listar_projetos(self):
         # Cria variável para armazenar lista de projetos
@@ -184,6 +136,44 @@ class Database:
             return lista_de_projetos
         # Caso esteja vazio, retorna que nenhum projeto foi localizado
         return []
+
+    # Modifica informações do projeto no arquivo com base no ID
+    def atualizar_projeto(self, id, dados):
+        # Procura pelo projeto com o ID específico
+        for projeto in self.dados["projetos"]:
+            if projeto["id"] == int(id):
+                # Atualiza os dados existentes com os novos dados
+                projeto.update(dados.to_dict())
+                self.atualizar_json()
+                return "Projeto atualizado com sucesso"
+        # Se o ID do projeto não for encontrado, printa uma mensagem
+        print(f"Projeto com ID {id} não encontrada.")
+
+    # Exclui o projeto do arquivo com base no ID fornecido
+    def excluir_projeto(self, id):
+        # Converte o ID pra int
+        id = int(id)
+
+        # Procura pelo projeto com o ID específico
+        for indice, projeto in enumerate(self.dados["projetos"]):
+            if projeto["id"] == id:
+                # Remove a tarefa da lista
+                del self.dados["projetos"][indice]
+                self.atualizar_json()
+                print(f"Projeto com ID {id} excluído com sucesso.")
+                return
+        # Se o ID do projeto não for encontrado, printa uma mensagem
+        print(f"Projeto com ID {id} não encontrada.")
+
+    # Consulta informações do projeto de acordo com ID
+    def consultar_projeto_por_id(self, id):
+        # Para cada projeto dentro do objeto de projetos
+        for projeto in self.dados["projetos"]:
+            # Retorna o projeto completo se o ID bater
+            if projeto["id"] == int(id):
+                return projeto
+        # Se não, retorna nada
+        return "Nenhum projeto encontrado."
 
     # Lista as tarefas que não fazem parte do projeto
     def listar_tarefas_dentro_do_projeto(self, id):
@@ -230,21 +220,27 @@ class Database:
         # Retorna a lista de tarefas que não estão no projeto
         return tarefas_fora_do_projeto
 
-    # Exclui o projeto do arquivo com base no ID fornecido
-    def excluir_projeto(self, id):
-        # Converte o ID pra int
-        id = int(id)
+    # ------- OPERAÇÕES COM USUÁRIOS -------
 
-        # Procura pelo projeto com o ID específico
-        for indice, projeto in enumerate(self.dados["projetos"]):
-            if projeto["id"] == id:
-                # Remove a tarefa da lista
-                del self.dados["projetos"][indice]
+    # Adiciona informações do usuário ao arquivo
+    def adicionar_usuario(self, usuario):
+        # Define o ID como tamanho da lista + 1
+        usuario.id = len(self.dados["usuarios"]) + 1
+        self.dados["usuarios"].append(usuario.to_dict())
+        self.atualizar_json()
+        return "Usuário adicionado com sucesso"
+
+    # Modifica informações do usuário no arquivo com base no ID
+    def atualizar_usuario(self, id, dados):
+        # Procura pelo usuário com o ID específico
+        for usuario in self.dados["usuarios"]:
+            if usuario["id"] == int(id):
+                # Atualiza os dados existentes com os novos dados
+                usuario.update(dados.to_dict())
                 self.atualizar_json()
-                print(f"Projeto com ID {id} excluído com sucesso.")
-                return
-        # Se o ID do projeto não for encontrado, printa uma mensagem
-        print(f"Projeto com ID {id} não encontrada.")
+                return "Usuário atualizado com sucesso"
+        # Se o ID do usuário não for encontrado, printa uma mensagem
+        print(f"Usuário com ID {id} não encontrada.")
 
     # Exclui o usuário do arquivo com base no ID fornecido
     def excluir_usuario(self, id):
@@ -278,6 +274,16 @@ class Database:
 
         # Caso esteja vazia, retorna lista vazia
         return []
+
+    # Consultar informações do usuario de acordo com ID
+    def consultar_usuario_por_id(self, id):
+        # Para cada usuário dentro do objeto de usuários
+        for usuario in self.dados["usuarios"]:
+            # Retorna os dados completos do usuário se o ID bater
+            if usuario["id"] == int(id):
+                return usuario
+        # Se não, retorna que não foi localizado
+        return "Nenhum usuário localizado."
 
     # Lista as tarefas que fazem parte do usuário
     def listar_tarefas_fora_do_usuario(self, id):
