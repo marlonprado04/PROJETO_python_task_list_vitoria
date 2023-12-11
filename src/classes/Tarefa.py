@@ -40,6 +40,9 @@ class Tarefa:
 
     # Adiciona um novo projeto no fim da lista se ele não existir
     def adicionar_projeto(self, id):
+        # Converte ID em int
+        id = int(id)
+        
         # Verifica se o id do projeto não está na lista de ID 
         if id not in self.id_projetos:
             # Adiciona o ID do projeto na lista de ID
@@ -47,6 +50,9 @@ class Tarefa:
             
     # Renove o projeto na lista de projetos da tarefa
     def remover_projeto(self, id):
+        # Converte ID em int
+        id = int(id)
+        
         # Remove o ID do item 
         self.id_projetos.remove(id)
     
