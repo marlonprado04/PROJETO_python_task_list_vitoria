@@ -214,8 +214,15 @@ class Database:
         # Obtém a lista completa de tarefas
         todas_tarefas = self.listar_tarefas()
         
-        # Cria uma lista de tarefas que não fazem parte do projeto
-        tarefas_fora = [tarefa for tarefa in todas_tarefas if id not in tarefa["id_projetos"]]
+        # Cria lista para armazenar tarefas sem o projeto vinculado
+        tarefas_fora_do_projeto = []
         
-        # Retorna a lista de tarefas que não estão no projeto, ou None se a lista estiver vazia
-        return tarefas_fora or "Não existem tarefas fora do projeto"
+        # Verifica todas as tarefas da lista
+        for tarefa in todas_tarefas:
+            # Verifica se o ID do projeto não está na lista de IDs de projetos na tarefa
+            if id not in tarefa["id_projetos"]:
+                # Armazena a tarefa dentro da lista de tarefas fora do projeto
+                tarefas_fora_do_projeto.append(tarefa)
+                    
+        # Retorna a lista de tarefas que não estão no projeto
+        return tarefas_fora_do_projeto
