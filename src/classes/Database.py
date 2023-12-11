@@ -153,7 +153,7 @@ class Database:
             # Retorna lista de tarefas prenchida
             return lista_de_tarefas
         # Caso esteja vazio, retorna que nenhuma tarefa foi localizada
-        return "Nenhuma tarefa localizada"
+        return []
 
     # Exclui a tarefa do arquivo com base no ID
     def excluir_tarefa(self, id):
@@ -180,7 +180,7 @@ class Database:
             # Retorna lista de projetos prenchida
             return lista_de_projetos
         # Caso esteja vazio, retorna que nenhum projeto foi localizado
-        return "Nenhuma projeto localizado"
+        return []
 
     # Lista as tarefas que não fazem parte do projeto
     def listar_tarefas_dentro_do_projeto(self, id):
@@ -190,11 +190,21 @@ class Database:
         # Obtém o projeto correspondente ao ID
         projeto = self.consultar_projeto_por_id(id)
         
-        # Cria uma lista de tarefas dentro do projeto
-        lista_de_tarefas = [self.consultar_tarefa_por_id(id_tarefa) for id_tarefa in projeto["id_tarefas"]]
+        # Cria lista para armazenar os IDs
+        lista_de_tarefas = []
         
-        # Retorna a lista de tarefas
-        return lista_de_tarefas or "O projeto não tem tarefas definidas"
+        # Verifica se lista de tarefas do projeto é maior que zero
+        if projeto["id_tarefas"] > 0:
+            # Mapeia todos os IDs dentro do array de ID de tarefas
+            for id_tarefa in projeto["id_tarefas"]:
+                # Adiciona a tarefa pesquisada pelo ID
+                lista_de_tarefas.append(self.consultar_tarefa_por_id(id_tarefa))
+            
+            # Retorna a lista de tarefas
+            return lista_de_tarefas
+        
+        # Retorna lista vazia
+        return []
 
     # Lista as tarefas que fazem parte do projeto
     def listar_tarefas_fora_do_projeto(self, id):

@@ -8,14 +8,7 @@ db = Database("./data/dados.json")
 
 
 # Adiciona dados de exemplo em Tarefas e Projetos para testes
-tarefa = Tarefa("Tarefa criada por último")
-db.adicionar_tarefa(tarefa)
 
-projeto = Projeto("Meu primeiro projeto")
-projeto.adicionar_tarefa(1)
-projeto.adicionar_tarefa(3)
-projeto.adicionar_tarefa(5)
-db.adicionar_projeto(projeto)
 
 # Pula o número informado de linhas
 def pula_linhas(numero_de_linhas):
@@ -184,8 +177,8 @@ def menu_projeto():
         print("4. Adicionar tarefa a um projeto")
         print("5. Remover tarefa de um projeto")
         print("6. Listar tarefas de um projeto")
-        print("6. Remover projeto")
-        print("7. Voltar ao menu principal")
+        print("7. Remover projeto")
+        print("8. Voltar ao menu principal")
         print("e. Encerrar programa")
         
         pula_linhas(1)
@@ -211,7 +204,7 @@ def menu_projeto():
             pula_linhas(1)
             
             # Cria um novo projeto e atualiza sua descrição em seguida
-            projeto = Tarefa(titulo)
+            projeto = Projeto(titulo)
             projeto.atualizar_descricao(descricao)
             
             # Adiciona projeto criado no arquivo json e printa o resultado da execução
@@ -346,14 +339,47 @@ def menu_projeto():
             # Cria uma instância de tarefas a partir do dicionário
             tarefa = Tarefa.criar_tarefa_a_partir_de_dict(tarefa_no_banco)
             # Adiciona o ID do projeto na tarefa
-            tarefa.adicionar_projeto(id_projeto)
+            tarefa.remover_projeto(id_projeto)
             
             # Cria instância do projeto a partir dos dados do banco
             projeto = Projeto.criar_projeto_a_partir_de_dict(projeto_no_banco)
-            projeto.adicionar_tarefa(id_tarefa)
+            projeto.remover_tarefa(id_tarefa)
             
+            # Imprime mensagem
+            print(f'Tarefa: "{tarefa.obter_titulo()}" removida do projeto "{projeto.obter_titulo()}".')
             break
         elif opcao_projeto == '6':
+            # Armazena resultado da listagem de projetos em uma variável 
+            lista_de_projetos = db.listar_projetos()     
+            
+            # Imprime na tela as informações de cada projeto na lista
+            for projeto in lista_de_projetos:
+                print(Projeto.to_line(projeto))
+            
+            # Recebe o ID do projeto desejado
+            pula_linhas(1)
+            id_projeto = input("Digite o ID do projeto: ")
+            pula_linhas(1)
+            
+            # Informa os dados do projeto selecionado
+            print("O projeto selecionado foi: ")
+            pula_linhas(1)
+            projeto_no_banco = db.consultar_projeto_por_id(id_projeto)
+            print(Projeto.to_line(projeto_no_banco))
+            pula_linhas(1)
+            
+            # Imprime mensagem
+            pula_linhas(1)
+            print("Abaixo a lista de tarefas do projeto selecionado:")
+            pula_linhas(1)
+            
+            # Cria lista de tarefas 
+            lista_de_tarefas = db.listar_tarefas_dentro_do_projeto(id_projeto)
+            
+            # Imprime as tarefas da lista
+            for tarefa in lista_de_tarefas:
+                print(f"-> {Tarefa.to_line(tarefa)}")
+                
             break
         elif opcao_projeto == '7':
             break

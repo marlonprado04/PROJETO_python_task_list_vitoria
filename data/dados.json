@@ -1,0 +1,68 @@
+{
+    "usuarios": [],
+    "projetos": [
+        {
+            "id": 1,
+            "titulo": "111",
+            "descricao": "111",
+            "id_tarefas": [
+                1
+            ],
+            "id_usuarios": []
+        },
+        {
+            "id": 2,
+            "titulo": "111",
+            "descricao": "11",
+            "id_tarefas": [],
+            "id_usuarios": []
+        },
+        {
+            "id": 3,
+            "titulo": "222",
+            "descricao": "22",
+            "id_tarefas": [
+                2,
+                1
+            ],
+            "id_usuarios": []
+        }
+    ],
+    "tarefas": [
+        {
+            "id": 1,
+            "titulo": "1111",
+            "descricao": "1111",
+            "status": "Pendente",
+            "data_criacao": "2023-12-11 17:32:08",
+            "data_conclusao": null,
+            "id_projetos": [
+                1,
+                3
+            ],
+            "id_usuarios": []
+        },
+        {
+            "id": 2,
+            "titulo": "222",
+            "descricao": "222",
+            "status": "Pendente",
+            "data_criacao": "2023-12-11 17:32:12",
+            "data_conclusao": null,
+            "id_projetos": [
+                3
+            ],
+            "id_usuarios": []
+        },
+        {
+            "id": 3,
+            "titulo": "333",
+            "descricao": "333",
+            "status": "Pendente",
+            "data_criacao": "2023-12-11 17:32:15",
+            "data_conclusao": null,
+            "id_projetos": [],
+            "id_usuarios": []
+        }
+    ]
+}
