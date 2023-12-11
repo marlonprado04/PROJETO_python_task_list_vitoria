@@ -331,7 +331,7 @@ while True:
     print("1. Menu de tarefas")
     print("2. Menu de projetos")
     print("3. Menu de usuários")
-    print("4. Encerrar programa")
+    print("e. Encerrar programa")
     pula_linhas(1)
     
     opcao = input("Digite a opção desejada: ")
@@ -345,7 +345,7 @@ while True:
     elif opcao == '3':
         menu_usuario()
 
-    elif opcao == '4':
+    elif opcao == 'e':
         print("Saindo do programa. Até logo!")
         break
 
