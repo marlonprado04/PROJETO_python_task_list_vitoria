@@ -28,7 +28,7 @@ def menu_tarefas():
         print("3. Atualizar informações da tarefa")
         print("4. Atualizar status da tarefa")
         print("5. Remover tarefa")
-        print("6. Voltar ao menu principal")
+        print("v. Voltar ao menu principal")
         print("e. Encerrar programa")
         
         pula_linhas(1)
@@ -155,7 +155,7 @@ def menu_tarefas():
             # Exclui tarefa selecionada
             db.excluir_tarefa(numero)
             break
-        elif opcao_tarefa == '6':
+        elif opcao_tarefa == 'v':
             break
         elif opcao_tarefa == 'e':
             exit()
@@ -178,7 +178,7 @@ def menu_projeto():
         print("5. Remover tarefa de um projeto")
         print("6. Listar tarefas de um projeto")
         print("7. Remover projeto")
-        print("8. Voltar ao menu principal")
+        print("v. Voltar ao menu principal")
         print("e. Encerrar programa")
         
         pula_linhas(1)
@@ -411,7 +411,7 @@ def menu_projeto():
             # Exclui projeto selecionado
             db.excluir_projeto(numero)
             break
-        elif opcao_projeto == '8':
+        elif opcao_projeto == 'v':
             break
         elif opcao_projeto == 'e':
             exit()
